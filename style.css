@@ -1,26 +1,25 @@
-/* Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* Controls */
+#controls {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  z-index: 1000;
 }
 
-/* Game Area */
-#gameArea {
-  width: 100vw;
-  height: 100vh;
-  background: linear-gradient(skyblue, white); /* Sky effect */
-  overflow: hidden;
-  position: relative;
+.control-btn {
+  width: 60px;
+  height: 60px;
+  margin: 5px;
+  font-size: 24px;
+  border: none;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  cursor: pointer;
 }
 
-/* Player (like a balloon or plane) */
-#player {
-  width: 50px;
-  height: 50px;
-  background: red;
-  border-radius: 50%;
-  position: absolute;
-  bottom: 50px;
-  left: 50px;
+.control-btn:active {
+  background-color: rgba(0, 0, 0, 0.9);
 }
