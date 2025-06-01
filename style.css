@@ -1,20 +1,26 @@
-/* Reset all elements */
+/* Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* Body and canvas styling */
-body {
-  background-color: skyblue;
-  overflow: hidden;
-}
-
-#gameCanvas {
-  display: block;
-  margin: auto;
-  background-color: skyblue;
+/* Game Area */
+#gameArea {
   width: 100vw;
   height: 100vh;
+  background: linear-gradient(skyblue, white); /* Sky effect */
+  overflow: hidden;
+  position: relative;
+}
+
+/* Player (like a balloon or plane) */
+#player {
+  width: 50px;
+  height: 50px;
+  background: red;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 50px;
+  left: 50px;
 }
