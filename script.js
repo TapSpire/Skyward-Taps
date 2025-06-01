@@ -1,12 +1,20 @@
-// Get elements
-const clickButton = document.getElementById("clickButton");
-const clicksDisplay = document.getElementById("clicks");
+/* Reset all elements */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-// Set initial click count
-let clickCount = 0;
+/* Body and canvas styling */
+body {
+  background-color: skyblue;
+  overflow: hidden;
+}
 
-// Add event listener to button
-clickButton.addEventListener("click", function() {
-  clickCount++;
-  clicksDisplay.textContent = clickCount; // Update click count on page
-});
+#gameCanvas {
+  display: block;
+  margin: auto;
+  background-color: skyblue;
+  width: 100vw;
+  height: 100vh;
+}
