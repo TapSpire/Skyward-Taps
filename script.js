@@ -1,16 +1,16 @@
 const player = document.getElementById('player');
 let posX = 50;
 let posY = 50;
-const step = 10;
 
-function movePlayerByKey(key) {
-  if (key === 'ArrowRight') {
+function movePlayer(e) {
+  const step = 10;
+  if (e.key === 'ArrowRight') {
     posX += step;
-  } else if (key === 'ArrowLeft') {
+  } else if (e.key === 'ArrowLeft') {
     posX -= step;
-  } else if (key === 'ArrowUp') {
+  } else if (e.key === 'ArrowUp') {
     posY += step;
-  } else if (key === 'ArrowDown') {
+  } else if (e.key === 'ArrowDown') {
     posY -= step;
   }
 
@@ -18,14 +18,4 @@ function movePlayerByKey(key) {
   player.style.bottom = posY + 'px';
 }
 
-// Keyboard support
-window.addEventListener('keydown', (e) => movePlayerByKey(e.key));
-
-// Touch button support
-document.querySelectorAll('.control-btn').forEach(button => {
-  button.addEventListener('touchstart', (e) => {
-    e.preventDefault(); // prevent scrolling on mobile
-    const direction = button.getAttribute('data-direction');
-    movePlayerByKey(direction);
-  });
-});
+window.addEventListener('keydown', movePlayer);
