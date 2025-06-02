@@ -2,14 +2,21 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sky Game</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Word Click Game</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="gameArea">
-    <div id="player"></div>
+  <div id="game-container">
+    <h1>Word Click Game</h1>
+    <div id="question">Tap/click the correct words:</div>
+    <div id="words-container"></div>
+    <button id="restart-btn" style="display:none;">Restart Game</button>
+    <div id="status"></div>
+    <div id="score">Score: 0</div>
   </div>
-  <script src="script.js"></script>
+
+  <script src="words.js"></script>
+  <script src="game.js"></script>
 </body>
 </html>
