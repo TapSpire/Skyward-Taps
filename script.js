@@ -1,63 +1,71 @@
-// Core game logic
-
-const questionEl = document.getElementById("question");
-const wordsContainer = document.getElementById("words-container");
-const restartBtn = document.getElementById("restart-btn");
-const statusEl = document.getElementById("status");
-const scoreEl = document.getElementById("score");
+const circle = document.getElementById("circle");
+const scoreDisplay = document.getElementById("score");
+const timerDisplay = document.getElementById("timer");
+const restartBtn = document.getElementById("restartBtn");
+const gameContainer = document.querySelector(".game-container");
 
 let score = 0;
-let gameOver = false;
+let timeLeft = 30;
+let gameInterval;
+let timerInterval;
 
-function shuffleArray(arr) {
-  // Fisher-Yates shuffle
-  for(let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
-  }
-  return arr;
+function getRandomPosition() {
+  const containerRect = gameContainer.getBoundingClientRect();
+  const circleSize = 60; // same as CSS width/height
+
+  const x = Math.random() * (containerRect.width - circleSize);
+  const y = Math.random() * (containerRect.height - circleSize - 100) + 100; 
+  // subtract 100px to avoid overlapping score/timer/title area
+
+  return { x, y };
+}
+
+function moveCircle() {
+  const { x, y } = getRandomPosition();
+  circle.style.left = `${x}px`;
+  circle.style.top = `${y}px`;
 }
 
 function startGame() {
   score = 0;
-  gameOver = false;
-  statusEl.textContent = "";
-  scoreEl.textContent = "Score: 0";
+  timeLeft = 30;
+  scoreDisplay.textContent = `Score: ${score}`;
+  timerDisplay.textContent = `Time: ${timeLeft}s`;
   restartBtn.style.display = "none";
-  
-  questionEl.textContent = gameData.question;
+  circle.style.display = "block";
 
-  // Combine correct and incorrect words and shuffle
-  const words = shuffleArray([...gameData.correctWords, ...gameData.incorrectWords]);
+  moveCircle();
 
-  // Clear previous words
-  wordsContainer.innerHTML = "";
+  gameInterval = setInterval(() => {
+    moveCircle();
+  }, 1000);
 
-  // Create word buttons
-  words.forEach(word => {
-    const wordEl = document.createElement("div");
-    wordEl.classList.add("word");
-    wordEl.textContent = word;
-    wordEl.addEventListener("click", () => handleWordClick(word));
-    wordsContainer.appendChild(wordEl);
-  });
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    timerDisplay.textContent = `Time: ${timeLeft}s`;
+    if (timeLeft <= 0) {
+      endGame();
+    }
+  }, 1000);
 }
 
-function handleWordClick(word) {
-  if (gameOver) return;
+function endGame() {
+  clearInterval(gameInterval);
+  clearInterval(timerInterval);
+  circle.style.display = "none";
+  restartBtn.style.display = "inline-block";
+  timerDisplay.textContent = `Game Over! Final Score: ${score}`;
+}
 
-  if (gameData.correctWords.includes(word)) {
+circle.addEventListener("click", () => {
+  if (timeLeft > 0) {
     score++;
-    scoreEl.textContent = `Score: ${score}`;
-  } else {
-    // Incorrect word clicked, game over
-    gameOver = true;
-    statusEl.textContent = "Game Over! You clicked a wrong word.";
-    restartBtn.style.display = "inline-block";
+    scoreDisplay.textContent = `Score: ${score}`;
+    moveCircle();
   }
-}
+});
 
 restartBtn.addEventListener("click", startGame);
 
-// Initialize the game on page load
+// Start the game automatically when the page loads
 window.onload = startGame;
