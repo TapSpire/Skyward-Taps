@@ -1,22 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Word Click Game</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Word Click Game</title>
+<style>
+  /* Reset */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body, html {
+    height: 100%;
+    font-family: Arial, sans-serif;
+    background-color: #fafafa;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  #game-container {
+    max-width: 500px;
+    width: 90vw;
+    text-align: center;
+    padding: 20px;
+    border: 3px solid #333;
+    border-radius: 12px;
+    background-color: white;
+    user-select: none;
+  }
+
+  #question {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+
+  #words-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+
+  .word {
+    padding: 15px 25px;
+    font-size: 1.4rem;
+    border-radius: 8px;
+    background-color: #e0e0e0;
+    cursor: pointer;
+    user-select: none;
+    flex: 1 1 40%;
+    max-width: 40%;
+    transition: background-color 0.3s ease;
+  }
+
+  .word:hover {
+    background-color: #c0c0c0;
+  }
+
+  #restart-btn {
+    padding: 15px 30px;
+    font-size: 1.5rem;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    display: none;
+  }
+
+  #restart-btn:hover {
+    background-color: #0056b3;
+  }
+
+  #status {
+    margin-top: 15px;
+    font-size: 1.3rem;
+    color: red;
+    height: 1.5rem;
+  }
+
+  #score {
+    margin-top: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+</style>
 </head>
 <body>
   <div id="game-container">
     <h1>Word Click Game</h1>
-    <div id="question">Tap/click the correct words:</div>
+    <div id="question">Tap/click the fruits:</div>
     <div id="words-container"></div>
-    <button id="restart-btn" style="display:none;">Restart Game</button>
+    <button id="restart-btn">Restart Game</button>
     <div id="status"></div>
     <div id="score">Score: 0</div>
   </div>
 
-  <script src="words.js"></script>
-  <script src="game.js"></script>
+<script>
+  // Game data with words
+  const gameData = {
+    question: "Tap/click the fruits:",
+    correctWords: ["Apple", "Banana", "Orange", "Grape", "Pear"],
+    incorrectWords: ["Car", "Dog", "House", "Table", "Computer"]
+  };
+
+  // DOM Elements
+  const questionEl = document.getElementById("question");
+  const wordsContainer = document.getElementById("words-container");
+  const restartBtn = document.getElementById("restart-btn");
+  const statusEl = document.getElementById("status");
+  const scoreEl = document.getElementById("score");
+
+  let score = 0;
+  let gameOver = false;
+
+  function shuffleArray(arr) {
+    for(let i = arr.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }
+
+  function startGame() {
+    score = 0;
+    gameOver = false;
+    statusEl.textContent = "";
+    scoreEl.textContent = "Score: 0";
+    restartBtn.style.display = "none";
+    
+    questionEl.textContent = gameData.question;
+
+    const words = shuffleArray([...gameData.correctWords, ...gameData.incorrectWords]);
+    wordsContainer.innerHTML = "";
+
+    words.forEach(word => {
+      const wordEl = document.createElement("div");
+      wordEl.classList.add("word");
+      wordEl.textContent = word;
+      wordEl.addEventListener("click", () => handleWordClick(word));
+      wordsContainer.appendChild(wordEl);
+    });
+  }
+
+  function handleWordClick(word) {
+    if (gameOver) return;
+
+    if (gameData.correctWords.includes(word)) {
+      score++;
+      scoreEl.textContent = `Score: ${score}`;
+    } else {
+      gameOver = true;
+      statusEl.textContent = "Game Over! You clicked a wrong word.";
+      restartBtn.style.display = "inline-block";
+    }
+  }
+
+  restartBtn.addEventListener("click", startGame);
+
+  window.onload = startGame;
+</script>
 </body>
 </html>
