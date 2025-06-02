@@ -1,25 +1,82 @@
-/* Controls */
-#controls {
-  position: fixed;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-  z-index: 1000;
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.control-btn {
-  width: 60px;
-  height: 60px;
-  margin: 5px;
-  font-size: 24px;
-  border: none;
-  border-radius: 10px;
-  background-color: rgba(0, 0, 0, 0.7);
+body, html {
+  height: 100%;
+  font-family: Arial, sans-serif;
+  background-color: #fafafa;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#game-container {
+  max-width: 500px;
+  width: 90vw;
+  text-align: center;
+  padding: 20px;
+  border: 3px solid #333;
+  border-radius: 12px;
+  background-color: white;
+  user-select: none;
+}
+
+#question {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+#words-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.word {
+  padding: 15px 25px;
+  font-size: 1.4rem;
+  border-radius: 8px;
+  background-color: #e0e0e0;
+  cursor: pointer;
+  user-select: none;
+  flex: 1 1 40%;
+  max-width: 40%;
+  transition: background-color 0.3s ease;
+}
+
+.word:hover {
+  background-color: #c0c0c0;
+}
+
+#restart-btn {
+  padding: 15px 30px;
+  font-size: 1.5rem;
+  background-color: #007BFF;
   color: white;
+  border: none;
+  border-radius: 12px;
   cursor: pointer;
 }
 
-.control-btn:active {
-  background-color: rgba(0, 0, 0, 0.9);
+#restart-btn:hover {
+  background-color: #0056b3;
+}
+
+#status {
+  margin-top: 15px;
+  font-size: 1.3rem;
+  color: red;
+  height: 1.5rem;
+}
+
+#score {
+  margin-top: 10px;
+  font-size: 1.2rem;
+  font-weight: bold;
 }
