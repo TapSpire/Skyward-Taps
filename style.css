@@ -1,82 +1,63 @@
-/* Reset */
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
 body, html {
+  margin: 0;
+  padding: 0;
   height: 100%;
   font-family: Arial, sans-serif;
-  background-color: #fafafa;
   display: flex;
   justify-content: center;
   align-items: center;
+  background: #f0f8ff;
 }
 
-#game-container {
-  max-width: 500px;
-  width: 90vw;
+.game-container {
   text-align: center;
+  position: relative;
+  width: 90vw;
+  max-width: 500px;
+  height: 80vh;
+  background: white;
+  border: 2px solid #333;
+  border-radius: 10px;
   padding: 20px;
-  border: 3px solid #333;
-  border-radius: 12px;
-  background-color: white;
   user-select: none;
 }
 
-#question {
+#score, #timer {
   font-size: 1.2rem;
-  margin-bottom: 20px;
+  margin: 10px 0;
 }
 
-#words-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 12px;
-  margin-bottom: 20px;
-}
-
-.word {
-  padding: 15px 25px;
-  font-size: 1.4rem;
-  border-radius: 8px;
-  background-color: #e0e0e0;
+#circle {
+  width: 60px;
+  height: 60px;
+  background: #ff6347;
+  border-radius: 50%;
+  position: absolute;
   cursor: pointer;
-  user-select: none;
-  flex: 1 1 40%;
-  max-width: 40%;
-  transition: background-color 0.3s ease;
+  touch-action: manipulation;
+  transition: background 0.2s;
 }
 
-.word:hover {
-  background-color: #c0c0c0;
+#circle:active {
+  background: #e5533d;
 }
 
-#restart-btn {
-  padding: 15px 30px;
-  font-size: 1.5rem;
-  background-color: #007BFF;
-  color: white;
+button {
+  margin-top: 20px;
+  font-size: 1rem;
+  padding: 10px 20px;
+  cursor: pointer;
   border: none;
-  border-radius: 12px;
-  cursor: pointer;
+  background: #333;
+  color: white;
+  border-radius: 5px;
+  user-select: none;
 }
 
-#restart-btn:hover {
-  background-color: #0056b3;
-}
-
-#status {
-  margin-top: 15px;
-  font-size: 1.3rem;
-  color: red;
-  height: 1.5rem;
-}
-
-#score {
-  margin-top: 10px;
-  font-size: 1.2rem;
-  font-weight: bold;
+button:hover {
+  background: #555;
 }
