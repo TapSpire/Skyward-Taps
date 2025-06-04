@@ -3,6 +3,7 @@ const scoreDisplay = document.getElementById("score");
 const timerDisplay = document.getElementById("timer");
 const restartBtn = document.getElementById("restartBtn");
 const gameContainer = document.querySelector(".game-container");
+const words = ["Apple", "Banana", "Guitar", "Ocean", "Laptop", "Tiger", "River", "Mountain", "Book", "Galaxy"];
 
 let score = 0;
 let timeLeft = 30;
@@ -11,20 +12,17 @@ let timerInterval;
 
 function getRandomPosition() {
   const containerRect = gameContainer.getBoundingClientRect();
-  const circleSize = 60; // same as CSS width/height
-  const words = ["Apple", "Banana", "Guitar", "Ocean", "Laptop", "Tiger", "River", "Mountain", "Book", "Galaxy"];
-
+  const circleSize = 60;
 
   const x = Math.random() * (containerRect.width - circleSize);
-  const y = Math.random() * (containerRect.height - circleSize - 100) + 100; 
-  // subtract 100px to avoid overlapping score/timer/title area
+  const y = Math.random() * (containerRect.height - circleSize - 100) + 100;
 
   return { x, y };
 }
 
 function moveCircle() {
   const { x, y } = getRandomPosition();
-  const randomWord = words[Math.floor(Math.random() * words.length)];
+  const randomWord = words[Math.floor(Math.random() * words.length)]; // now this works!
   circle.textContent = randomWord;
   circle.style.left = `${x}px`;
   circle.style.top = `${y}px`;
