@@ -12,13 +12,15 @@ let timerInterval;
 
 function getRandomPosition() {
   const containerRect = gameContainer.getBoundingClientRect();
-  const circleSize = 60;
+  const circleSize = 60; // the size of the circle
 
+  // Calculate the maximum X and Y positions where the circle can fully fit within the container
   const x = Math.random() * (containerRect.width - circleSize);
-  const y = Math.random() * (containerRect.height - circleSize - 100) + 100;
+  const y = Math.random() * (containerRect.height - circleSize);
 
   return { x, y };
 }
+
 
 function moveCircle() {
   const { x, y } = getRandomPosition();
