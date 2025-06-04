@@ -16,7 +16,7 @@ function getRandomPosition() {
 
   // Calculate the maximum X and Y positions where the circle can fully fit within the container
   const x = Math.random() * (containerRect.width - circleSize);
-  const y = Math.random() * (containerRect.height - circleSize);
+  const y = Math.random() * (containerRect.height - circleSize - 100) + 100;
 
   return { x, y };
 }
