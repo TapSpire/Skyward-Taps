@@ -3,8 +3,11 @@ const scoreDisplay = document.getElementById("score");
 const timerDisplay = document.getElementById("timer");
 const restartBtn = document.getElementById("restartBtn");
 const gameContainer = document.querySelector(".game-container");
-const words = ["Apple", "Banana", "Guitar", "Ocean", "Laptop", "Tiger", "River", "Mountain", "Book", "Galaxy"];
 
+const correctWords = ["Apple", "Banana", "Tiger", "River", "Mountain"];
+const incorrectWords = ["Guitar", "Ocean", "Laptop", "Book", "Galaxy"];
+
+let currentWord = "";
 let score = 0;
 let timeLeft = 30;
 let gameInterval;
@@ -12,24 +15,31 @@ let timerInterval;
 
 function getRandomPosition() {
   const containerRect = gameContainer.getBoundingClientRect();
-  const circleSize = 60; // the size of the circle
+  const circleSize = 60;
 
-  // Calculate the maximum X and Y positions where the circle can fully fit within the container
   const x = Math.random() * (containerRect.width - circleSize);
   const y = Math.random() * (containerRect.height - circleSize - 100) + 100;
 
   return { x, y };
 }
 
+function getRandomWord() {
+  // 50% chance to get a correct or incorrect word
+  if (Math.random() < 0.5) {
+    currentWord = correctWords[Math.floor(Math.random() * correctWords.length)];
+  } else {
+    currentWord = incorrectWords[Math.floor(Math.random() * incorrectWords.length)];
+  }
+  return currentWord;
+}
 
 function moveCircle() {
   const { x, y } = getRandomPosition();
-  const randomWord = words[Math.floor(Math.random() * words.length)]; // now this works!
+  const randomWord = getRandomWord();
   circle.textContent = randomWord;
   circle.style.left = `${x}px`;
   circle.style.top = `${y}px`;
 }
-
 
 function startGame() {
   score = 0;
@@ -64,7 +74,11 @@ function endGame() {
 
 circle.addEventListener("click", () => {
   if (timeLeft > 0) {
-    score++;
+    if (correctWords.includes(currentWord)) {
+      score++;
+    } else {
+      score--;
+    }
     scoreDisplay.textContent = `Score: ${score}`;
     moveCircle();
   }
