@@ -12,6 +12,8 @@ let timerInterval;
 function getRandomPosition() {
   const containerRect = gameContainer.getBoundingClientRect();
   const circleSize = 60; // same as CSS width/height
+  const words = ["Apple", "Banana", "Guitar", "Ocean", "Laptop", "Tiger", "River", "Mountain", "Book", "Galaxy"];
+
 
   const x = Math.random() * (containerRect.width - circleSize);
   const y = Math.random() * (containerRect.height - circleSize - 100) + 100; 
@@ -22,9 +24,12 @@ function getRandomPosition() {
 
 function moveCircle() {
   const { x, y } = getRandomPosition();
+  const randomWord = words[Math.floor(Math.random() * words.length)];
+  circle.textContent = randomWord;
   circle.style.left = `${x}px`;
   circle.style.top = `${y}px`;
 }
+
 
 function startGame() {
   score = 0;
