@@ -4,8 +4,8 @@ const timerDisplay = document.getElementById("timer");
 const restartBtn = document.getElementById("restartBtn");
 const gameContainer = document.querySelector(".game-container");
 
-const correctWords = ["Apple", "Banana", "Tiger", "River", "Mountain"];
-const incorrectWords = ["Guitar", "Ocean", "Laptop", "Book", "Galaxy"];
+const correctWords = ["Receive", "Organize", "Aisle", "Grammar", "Mountain"];
+const incorrectWords = ["Rec", "Organise", "Ile", "Grammer", "Mountaine"];
 
 let currentWord = "";
 let score = 0;
@@ -25,9 +25,12 @@ function getRandomPosition() {
 
 function getRandomWord() {
   // 50% chance to get a correct or incorrect word
-  if (Math.random() < 0.5) {
+  if (Math.random() < 0.5) 
+  {
     currentWord = correctWords[Math.floor(Math.random() * correctWords.length)];
-  } else {
+  } 
+  else 
+  {
     currentWord = incorrectWords[Math.floor(Math.random() * incorrectWords.length)];
   }
   return currentWord;
@@ -43,7 +46,7 @@ function moveCircle() {
 
 function startGame() {
   score = 0;
-  timeLeft = 30;
+  timeLeft = 60;
   scoreDisplay.textContent = `Score: ${score}`;
   timerDisplay.textContent = `Time: ${timeLeft}s`;
   restartBtn.style.display = "none";
@@ -53,7 +56,7 @@ function startGame() {
 
   gameInterval = setInterval(() => {
     moveCircle();
-  }, 1000);
+  }, 3000);
 
   timerInterval = setInterval(() => {
     timeLeft--;
@@ -72,11 +75,16 @@ function endGame() {
   timerDisplay.textContent = `Game Over! Final Score: ${score}`;
 }
 
-circle.addEventListener("click", () => {
-  if (timeLeft > 0) {
-    if (correctWords.includes(currentWord)) {
+circle.addEventListener("click", () => 
+  {
+  if (timeLeft > 0) 
+  {
+    if (correctWords.includes(currentWord)) 
+    {
       score++;
-    } else {
+    } 
+    else 
+    {
       score--;
     }
     scoreDisplay.textContent = `Score: ${score}`;
