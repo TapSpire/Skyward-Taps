@@ -1,0 +1,11 @@
+// data.js
+
+export const correctWords = [
+  "Receive", "Organize", "Aisle", "Grammar", "Mountain",
+  // Add 95 more correct words here
+];
+
+export const incorrectWords = [
+  "Rec", "Organise", "Ile", "Grammer", "Mountaine",
+  // Add 95 more incorrect words here
+];
