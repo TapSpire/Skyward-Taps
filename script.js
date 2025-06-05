@@ -4,8 +4,7 @@ const timerDisplay = document.getElementById("timer");
 const restartBtn = document.getElementById("restartBtn");
 const gameContainer = document.querySelector(".game-container");
 
-const correctWords = ["Receive", "Organize", "Aisle", "Grammar", "Mountain"];
-const incorrectWords = ["Rec", "Organise", "Ile", "Grammer", "Mountaine"];
+import { correctWords, incorrectWords } from './data.js';
 
 let currentWord = "";
 let score = 0;
