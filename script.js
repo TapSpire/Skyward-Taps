@@ -86,6 +86,12 @@ circle.addEventListener("click", () =>
     else 
     {
       score--;
+      if (score < 0)
+      {
+         scoore = 0;
+         endGame();
+      }
+
     }
     scoreDisplay.textContent = `Score: ${score}`;
     moveCircle();
