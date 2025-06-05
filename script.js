@@ -134,7 +134,7 @@ circle.addEventListener("click", () =>
       score--;
       if (score < 0)
       {
-         scoore = 0;
+         score = 0;
          endGame();
       }
 
