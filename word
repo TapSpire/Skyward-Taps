@@ -1,6 +1,0 @@
-// Example data file with arrays of correct and incorrect words for the question
-const gameData = {
-  question: "Tap/click the fruits:",
-  correctWords: ["Apple", "Banana", "Orange", "Grape", "Pear"],
-  incorrectWords: ["Car", "Dog", "House", "Table", "Computer"]
-};
