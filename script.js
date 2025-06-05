@@ -15,10 +15,10 @@ let timerInterval;
 
 function getRandomPosition() {
   const containerRect = gameContainer.getBoundingClientRect();
-  const circleSize = 60;
+  const circleSize = 120;
 
   const x = Math.random() * (containerRect.width - circleSize);
-  const y = Math.random() * (containerRect.height - circleSize - 100) + 100;
+  const y = Math.random() * (containerRect.height - circleSize - 200) + 200;
 
   return { x, y };
 }
