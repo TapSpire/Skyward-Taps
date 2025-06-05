@@ -1,10 +1,10 @@
+import { correctWords, incorrectWords } from './data.js';
+
 const circle = document.getElementById("circle");
 const scoreDisplay = document.getElementById("score");
 const timerDisplay = document.getElementById("timer");
 const restartBtn = document.getElementById("restartBtn");
 const gameContainer = document.querySelector(".game-container");
-
-import { correctWords, incorrectWords } from './data.js';
 
 let currentWord = "";
 let score = 0;
