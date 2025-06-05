@@ -6,8 +6,54 @@ const timerDisplay = document.getElementById("timer");
 const restartBtn = document.getElementById("restartBtn");
 const gameContainer = document.querySelector(".game-container");
 
-const correctWords = [ "Receive", "Organize", "Aisle", "Grammar", "Mountain"];
-const incorrectWords = ["Rec", "Organise", "Ile", "Grammer", "Mountaine"];
+const correctWords = [
+  "Accommodate", "Achieve", "Across", "Aggressive", "A lot",
+  "Amateur", "Apparent", "Argument", "Basically", "Beginning",
+  "Believe", "Business", "Calendar", "Category", "Collectible",
+  "Column", "Committed", "Conscience", "Conscious", "Definitely",
+  "Discipline", "Drunkenness", "Embarrass", "Equipment", "Exaggerate",
+  "Exceed", "Experience", "Explanation", "Familiar", "Finally",
+  "Foreign", "Friend", "Generally", "Government", "Grammar",
+  "Guarantee", "Harass", "Height", "Humorous", "Immediate",
+  "Independent", "Interrupt", "Irresistible", "Knowledge", "Leisure",
+  "Library", "License", "Maintenance", "Maneuver", "Medieval",
+  "Memento", "Millennium", "Miniature", "Minimum", "Miscellaneous",
+  "Necessary", "Noticeable", "Occasion", "Occasionally", "Occurred",
+  "Occurrence", "Opportunity", "Pastime", "Perseverance", "Personnel",
+  "Playwright", "Possession", "Preferred", "Prejudice", "Principal",
+  "Privilege", "Probably", "Proceed", "Professor", "Pronunciation",
+  "Publicly", "Questionnaire", "Receive", "Recommend", "Referred",
+  "Repetition", "Restaurant", "Ridiculous", "Rhythm", "Schedule",
+  "Secretary", "Separate", "Similar", "Special", "Strength",
+  "Success", "Supersede", "Surprise", "Temperature", "Twelfth",
+  "Tomorrow", "Until", "Vacuum", "Weather", "Weird",
+  "Wherever", "Which", "Withhold", "Writing", "Yield"
+];
+
+const incorrectWords = [
+  "Acommodate", "Acheive", "Accross", "Aggresive", "Alot",
+  "Amature", "Apparant", "Arguement", "Basicly", "Begining",
+  "Belive", "Buisness", "Calender", "Catagory", "Collectable",
+  "Colum", "Commited", "Conscence", "Concious", "Definately",
+  "Disipline", "Drunkeness", "Embarass", "Equiptment", "Exagerate",
+  "Excede", "Experiance", "Explanaton", "Familar", "Finaly",
+  "Foriegn", "Freind", "Generalley", "Goverment", "Grammer",
+  "Gaurantee", "Harrass", "Hieght", "Humerous", "Imediate",
+  "Independant", "Interupt", "Irresistable", "Knowlege", "Liesure",
+  "Libary", "Lisense", "Maintanance", "Maneouvre", "Midieval",
+  "Momento", "Millenium", "Minature", "Minimun", "Miscelaneous",
+  "Necesary", "Noticable", "Ocasion", "Occasionly", "Ocurred",
+  "Occurence", "Oppertunity", "Pasttime", "Perseverence", "Personel",
+  "Playwrite", "Posession", "Prefered", "Predjudice", "Principle",
+  "Priviledge", "Probly", "Procede", "Proffessor", "Pronounciation",
+  "Publically", "Questionaire", "Recieve", "Reccomend", "Refered",
+  "Repitition", "Restaraunt", "Rediculous", "Rythm", "Schedual",
+  "Secratary", "Seperate", "Similiar", "Specal", "Strenght",
+  "Sucess", "Supercede", "Suprise", "Temprature", "Twelth",
+  "Tommorow", "Untill", "Vacume", "Wether", "Wierd",
+  "Whereever", "Wich", "Withold", "Writting", "Yeild"
+];
+
 
 let currentWord = "";
 let score = 0;
