@@ -39,6 +39,24 @@ body, html {
   cursor: pointer;
 }
 
+#circle {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  text-align: center;           /* Ensures multiline text is centered */
+  padding: 5px;                 /* Optional: gives some breathing room */
+  overflow: hidden;            /* Prevents overflow */
+  white-space: normal;         /* Allows wrapping within the box */
+  word-break: break-word;      /* Breaks long words nicely */
+}
+
 #circle:active {
   background: #e5533d;
 }
