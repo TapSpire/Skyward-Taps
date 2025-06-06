@@ -59,10 +59,16 @@ let timeLeft = 30;
 let gameInterval;
 let timerInterval;
 
-function getRandomPosition() {
-  const containerRect = gameContainer.getBoundingClientRect();
-  const circleSize = 120;
+let moveCount = 0;  // Track how many moves happened
 
+const normalSize = 120;
+const bigSize = 240;
+
+function getRandomPosition(circleSize) 
+{
+  const containerRect = gameContainer.getBoundingClientRect();
+
+  // Use passed circleSize to get a valid position so it stays inside container
   const x = Math.random() * (containerRect.width - circleSize);
   const y = Math.random() * (containerRect.height - circleSize - 200) + 200;
 
@@ -70,13 +76,9 @@ function getRandomPosition() {
 }
 
 function getRandomWord() {
-  // 50% chance to get a correct or incorrect word
-  if (Math.random() < 0.5) 
-  {
+  if (Math.random() < 0.5) {
     currentWord = correctWords[Math.floor(Math.random() * correctWords.length)];
-  } 
-  else 
-  {
+  } else {
     currentWord = incorrectWords[Math.floor(Math.random() * incorrectWords.length)];
   }
   return currentWord;
