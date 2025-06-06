@@ -75,16 +75,21 @@ function getRandomPosition(circleSize)
   return { x, y };
 }
 
-function getRandomWord() {
-  if (Math.random() < 0.5) {
+function getRandomWord() 
+{
+  if (Math.random() < 0.5) 
+  {
     currentWord = correctWords[Math.floor(Math.random() * correctWords.length)];
-  } else {
+  } 
+  else 
+  {
     currentWord = incorrectWords[Math.floor(Math.random() * incorrectWords.length)];
   }
   return currentWord;
 }
 
-function moveCircle() {
+function moveCircle() 
+{
   moveCount++;
 
   // Every 7th move, make circle big
@@ -112,7 +117,8 @@ function moveCircle() {
   circle.dataset.isBig = isBig ? 'true' : 'false';
 }
 
-function startGame() {
+function startGame() 
+{
   score = 0;
   timeLeft = 60;
   scoreDisplay.textContent = `Score: ${score}`;
