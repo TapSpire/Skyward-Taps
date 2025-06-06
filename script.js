@@ -111,7 +111,7 @@ function moveCircle()
 
   // Set word text
   const randomWord = getRandomWord();
-  circle.textContent = randomWord;
+  circle.innerHTML = `<span>${randomWord}</span>`;
 
   // Save size info on circle for use in click handler (optional)
   circle.dataset.isBig = isBig ? 'true' : 'false';
