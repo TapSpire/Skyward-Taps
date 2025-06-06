@@ -29,24 +29,39 @@ body, html {
 
 
 #circle {
+  /* remove padding */
+  padding: 0;
+
+  /* flexbox centering remains */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* relative for inner positioning */
   position: absolute;
   width: 120px;
   height: 120px;
   background-color: orange;
-  display: flex;
-  justify-content: center;       /* Horizontal centering */
-  align-items: center;           /* Vertical centering */
   color: white;
   font-weight: bold;
   cursor: pointer;
-  text-align: center;            /* Center multiline text */
-  padding: 5px;                  /* Breathing space inside circle */
+  text-align: center;
   overflow: hidden;
-  white-space: normal;           /* Allow line breaks */
-  word-break: break-word;        /* Break long words */
+  white-space: normal;
+  word-break: break-word;
   border-radius: 50%;
-  line-height: 1.2;              /* Ensures text height is balanced */
-  font-size: 12px;               /* Prevents overflow for long words */
+  line-height: 1.2;
+  font-size: 12px;
+}
+
+/* text wrapper inside circle */
+#circle > span {
+  padding: 5px; /* breathing space */
+  display: inline-block;
+  max-width: 100%;
+  box-sizing: border-box;
+  /* vertical centering hack */
+  line-height: normal; /* reset line-height */
 }
 
 
