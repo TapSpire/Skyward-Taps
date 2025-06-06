@@ -83,11 +83,31 @@ function getRandomWord() {
 }
 
 function moveCircle() {
-  const { x, y } = getRandomPosition();
-  const randomWord = getRandomWord();
-  circle.textContent = randomWord;
+  moveCount++;
+
+  // Every 7th move, make circle big
+  const isBig = moveCount % 7 === 0;
+
+  const circleSize = isBig ? bigSize : normalSize;
+
+  // Update circle size style (width, height, border-radius)
+  circle.style.width = `${circleSize}px`;
+  circle.style.height = `${circleSize}px`;
+  circle.style.borderRadius = '50%';  // keep circle shape
+
+  // Get position based on new size
+  const { x, y } = getRandomPosition(circleSize);
+
+  // Set position
   circle.style.left = `${x}px`;
   circle.style.top = `${y}px`;
+
+  // Set word text
+  const randomWord = getRandomWord();
+  circle.textContent = randomWord;
+
+  // Save size info on circle for use in click handler (optional)
+  circle.dataset.isBig = isBig ? 'true' : 'false';
 }
 
 function startGame() {
@@ -125,19 +145,21 @@ circle.addEventListener("click", () =>
   {
   if (timeLeft > 0) 
   {
+    const isBig = circle.dataset.isBig === 'true';
+
     if (correctWords.includes(currentWord)) 
     {
-      score++;
+      // If big circle, +3 points; else +1
+      score += isBig ? 3 : 1;
     } 
     else 
     {
       score--;
-      if (score < 0)
+      if (score < 0) 
       {
-         score = 0;
-         endGame();
+        score = 0;
+        endGame();
       }
-
     }
     scoreDisplay.textContent = `Score: ${score}`;
     moveCircle();
