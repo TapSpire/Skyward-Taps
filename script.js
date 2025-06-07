@@ -119,7 +119,7 @@ function showBonusMessage(message, color) {
   setTimeout(() => {
     bonusMessage.remove();
     bonusMessageVisible = false;  // Allow next message to show after timeout
-  }, 5000);
+  }, 3000);
 }
 
 function startGame() {
