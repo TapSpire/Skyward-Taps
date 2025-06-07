@@ -216,7 +216,8 @@ function createFireworks() {
 function checkScoreForFireworks() {
   if (score === 5) {
     createFireworks();
-    showBonusMessage("Fireworks! 5 Points!", "gold");
+    showBonusMessage("Fireworks! 30-second BONUS!", "gold");
+    timeLeft +=30;
   }
 }
 
