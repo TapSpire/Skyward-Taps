@@ -199,7 +199,7 @@ function endGame() {
 
 restartBtn.addEventListener("click", startGame);
 
-window.onload = startGame;
+window.onload = titleScreen;
 
 // Fireworks Animation
 
