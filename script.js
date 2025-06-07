@@ -157,7 +157,7 @@ function titleScreen()
 
 function startGame() {
   score = 0;
-  timeLeft = difficulty === "Easy" ? 60 : difficulty === "Medium" ? 45 : 30;
+  timeLeft = difficulty === "Easy" ? 120 : difficulty === "Medium" ? 60 : 40;
   scoreDisplay.textContent = `Score: ${score}`;
   timerDisplay.textContent = `Time: ${timeLeft}s`;
   restartBtn.style.display = "none";
