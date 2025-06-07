@@ -11,6 +11,7 @@ body, html {
   justify-content: center;
   align-items: center;
   background: #f0f8ff;
+  flex-direction: column;  /* Stack elements vertically */
 }
 
 #score, #timer {
@@ -20,10 +21,14 @@ body, html {
 
 .game-container {
   position: relative;
-  width: 600px;  /* or any size */
+  width: 600px;
   height: 400px;
   border: 1px solid black;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Vertically center content */
+  align-items: center;     /* Horizontally center content */
 }
 
 #circle {
@@ -40,25 +45,19 @@ body, html {
   cursor: pointer;
   text-align: center;
   overflow: hidden;
-  white-space: nowrap;  /* Prevents text from wrapping */
+  white-space: nowrap;
   word-break: break-word;
   border-radius: 50%;
   line-height: 1.2;
-  font-size: 18px;  /* Increased font size */
-  transition: width 0.3s, height 0.3s;  /* Smooth resizing */
+  font-size: 32px;
+  transition: width 0.3s, height 0.3s;
 }
 
-/* text wrapper inside circle */
-#circle > span {
-  padding: 5px;
-  display: inline-block;
-  max-width: 100%;
-  box-sizing: border-box;
-  line-height: normal;
-}
-
-#circle:active {
-  background: #e5533d;
+/* Centering title */
+h1 {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 button {
