@@ -11,28 +11,6 @@ body, html {
   overflow: hidden;
 }
 
-.top-ui {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  background-color: #f0f8ff;
-  z-index: 1000;
-  text-align: center;
-  padding: 10px 0;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.top-ui h1 {
-  font-size: 2rem;
-  margin: 0;
-}
-
-#score, #timer, #finalScore {
-  font-size: 1.2rem;
-  margin-top: 5px;
-}
-
 .game-container {
   position: relative;
   width: 360px;
@@ -40,11 +18,33 @@ body, html {
   border: 1px solid black;
   overflow: hidden;
   margin: 0 auto;
-  margin-top: 100px; /* Push container below top UI */
+  margin-top: 40px; /* Just enough spacing from top of page */
   display: flex;
   flex-direction: column;
+  align-items: center;
+  background-color: #f0f8ff;
+}
+
+.game-info {
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+
+#score, #timer, #finalScore {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.game-main {
+  flex: 1;
+  display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  width: 100%;
 }
 
 #circle {
@@ -52,11 +52,11 @@ body, html {
   justify-content: center;
   align-items: center;
   position: absolute;
-  padding: 20px; /* Adjust to control spacing inside the circle */
+  padding: 20px;
   width: auto;
   height: auto;
   aspect-ratio: 1 / 1;
-  background-color: rgba(255, 165, 0, 0.2); /* Orange with 0.2 opacity */
+  background-color: rgba(255, 165, 0, 0.2);
   color: white;
   font-weight: bold;
   cursor: pointer;
@@ -67,7 +67,6 @@ body, html {
   font-size: 32px;
   transition: width 0.3s, height 0.3s;
 }
-
 
 button {
   margin-top: 20px;
