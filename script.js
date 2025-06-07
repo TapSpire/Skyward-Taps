@@ -138,18 +138,27 @@ function titleScreen() {
   gameContainer.innerHTML = `
     <h1>Tapspire!</h1>
   `;
-  
+
   const easyBtn = document.createElement("button");
   easyBtn.textContent = "Easy";
-  easyBtn.onclick = () => { difficulty = "Easy"; startGame(); };
+  easyBtn.addEventListener('click', () => {
+    difficulty = "Easy";
+    startGame();
+  });
 
   const mediumBtn = document.createElement("button");
   mediumBtn.textContent = "Medium";
-  mediumBtn.onclick = () => { difficulty = "Medium"; startGame(); };
+  mediumBtn.addEventListener('click', () => {
+    difficulty = "Medium";
+    startGame();
+  });
 
   const hardBtn = document.createElement("button");
   hardBtn.textContent = "Hard";
-  hardBtn.onclick = () => { difficulty = "Hard"; startGame(); };
+  hardBtn.addEventListener('click', () => {
+    difficulty = "Hard";
+    startGame();
+  });
 
   gameContainer.appendChild(easyBtn);
   gameContainer.appendChild(mediumBtn);
@@ -161,7 +170,7 @@ function startGame() {
   timeLeft = difficulty === "Easy" ? 120 : difficulty === "Medium" ? 60 : 40;
   scoreDisplay.textContent = `Score: ${score}`;
   timerDisplay.textContent = `Time: ${timeLeft}s`;
-  
+
   restartBtn.style.display = "none";
   circle.style.display = "block";
 
@@ -189,6 +198,8 @@ function endGame() {
 }
 
 restartBtn.addEventListener("click", startGame);
+
+window.onload = titleScreen;
 
 // Fireworks Animation
 
@@ -237,4 +248,4 @@ circle.addEventListener("click", () => {
   checkScoreForFireworks();
 });
 
-window.onload = titleScreen;
+
