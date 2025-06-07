@@ -134,9 +134,11 @@ function showBonusMessage(message, color) {
   }, 3000);
 }
 
-function titleScreen() 
-{
-  gameContainer.innerHTML = `<h1>Tapspire</h1>`;
+function titleScreen() {
+  // Clear current game UI, but leave the score, timer, circle, and restart button structure
+  gameContainer.innerHTML = `
+    <h1>Tapspire</h1>
+  `;
   
   const easyBtn = document.createElement("button");
   easyBtn.textContent = "Easy";
@@ -150,10 +152,12 @@ function titleScreen()
   hardBtn.textContent = "Hard";
   hardBtn.onclick = () => { difficulty = "Hard"; startGame(); };
 
+  // Append buttons to the container
   gameContainer.appendChild(easyBtn);
   gameContainer.appendChild(mediumBtn);
   gameContainer.appendChild(hardBtn);
 }
+
 
 function startGame() {
   score = 0;
