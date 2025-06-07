@@ -137,7 +137,7 @@ function showBonusMessage(message, color) {
 function titleScreen() {
   // Clear current game UI, but leave the score, timer, circle, and restart button structure
   gameContainer.innerHTML = `
-    <h1>Tapspire</h1>
+    <h1>Tapspire!</h1>
   `;
   
   const easyBtn = document.createElement("button");
