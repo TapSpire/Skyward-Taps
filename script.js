@@ -160,10 +160,10 @@ circle.addEventListener("click", () => {
     if (correctWords.includes(currentWord)) {
       if (isBig) {
         score += 3;
-        showBonusMessage("1 point + 2 BONUS!", "lightgreen");
+        showBonusMessage("AWESOME! 1 pt + 2 BONUS!", "lightgreen");
       } else {
         score += 1;
-        showBonusMessage("+1 point", "lightgreen");
+        showBonusMessage("Good! +1 pt", "lightgreen");
       }
     } else {
       score--;
