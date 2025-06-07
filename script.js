@@ -222,20 +222,53 @@ function checkScoreForFireworks() {
 
 // Detect user clicks on the circle and update the score
 circle.addEventListener("click", () => {
+  let hoverText = document.createElement("div");
+  hoverText.classList.add("hover-feedback");
+
   if (correctWords.includes(currentWord)) 
   {
     score++;
     showBonusMessage("Correct!", "green");
+    hoverText.textContent = "Good!";
+    hoverText.style.color = "green";
   } 
   else if (incorrectWords.includes(currentWord)) 
   {
     score--;
     showBonusMessage("Oops! That's a misspelling!", "red");
+    hoverText.textContent = "Ouch!!!!";
+    hoverText.style.color = "red";
   }
+
+  // Position hover text above the circle
+  const circleRect = circle.getBoundingClientRect();
+  hoverText.style.position = "absolute";
+  hoverText.style.left = `${circleRect.left + circleRect.width / 2}px`;
+  hoverText.style.top = `${circleRect.top - 20}px`;
+  hoverText.style.transform = "translateX(-50%)";
+  hoverText.style.fontWeight = "bold";
+  hoverText.style.fontSize = "20px";
+  hoverText.style.pointerEvents = "none";
+  hoverText.style.zIndex = "1000";
+  hoverText.style.transition = "opacity 1s ease-out, transform 1s ease-out";
+  hoverText.style.opacity = "1";
+
+  document.body.appendChild(hoverText);
+
+  // Animate and remove
+  setTimeout(() => {
+    hoverText.style.opacity = "0";
+    hoverText.style.transform = "translateX(-50%) translateY(-30px)";
+  }, 50);
+
+  setTimeout(() => {
+    hoverText.remove();
+  }, 1000);
 
   scoreDisplay.textContent = `Score: ${score}`;
   checkScoreForFireworks();
 });
+
 
 
 
