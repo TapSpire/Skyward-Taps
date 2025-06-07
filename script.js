@@ -214,9 +214,9 @@ function createFireworks() {
 
 // Check if the score reaches 10 and trigger fireworks
 function checkScoreForFireworks() {
-  if (score === 10) {
+  if (score === 5) {
     createFireworks();
-    showBonusMessage("Fireworks! 10 Points!", "gold");
+    showBonusMessage("Fireworks! 5 Points!", "gold");
   }
 }
 
