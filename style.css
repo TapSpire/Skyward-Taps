@@ -44,7 +44,7 @@ body, html {
   word-break: break-word;
   border-radius: 50%;
   line-height: 1.2;
-  font-size: 32px;  /* Increased font size */
+  font-size: 18px;  /* Increased font size */
   transition: width 0.3s, height 0.3s;  /* Smooth resizing */
 }
 
