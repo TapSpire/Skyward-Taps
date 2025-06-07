@@ -135,7 +135,6 @@ function showBonusMessage(message, color) {
 }
 
 function titleScreen() {
-  // Clear current game UI, but leave the score, timer, circle, and restart button structure
   gameContainer.innerHTML = `
     <h1>Tapspire!</h1>
   `;
@@ -152,25 +151,20 @@ function titleScreen() {
   hardBtn.textContent = "Hard";
   hardBtn.onclick = () => { difficulty = "Hard"; startGame(); };
 
-  // Append buttons to the container
   gameContainer.appendChild(easyBtn);
   gameContainer.appendChild(mediumBtn);
   gameContainer.appendChild(hardBtn);
 }
 
-
 function startGame() {
-  // Reset the UI content
   score = 0;
   timeLeft = difficulty === "Easy" ? 120 : difficulty === "Medium" ? 60 : 40;
   scoreDisplay.textContent = `Score: ${score}`;
   timerDisplay.textContent = `Time: ${timeLeft}s`;
   
-  // Hide the title screen buttons and display the game elements
   restartBtn.style.display = "none";
-  circle.style.display = "block"; // Show the circle
+  circle.style.display = "block";
 
-  // Now the game starts with the corresponding difficulty level
   moveCircle();
 
   gameInterval = setInterval(() => {
@@ -186,7 +180,6 @@ function startGame() {
   }, 1000);
 }
 
-
 function endGame() {
   clearInterval(gameInterval);
   clearInterval(timerInterval);
@@ -196,5 +189,52 @@ function endGame() {
 }
 
 restartBtn.addEventListener("click", startGame);
+
+// Fireworks Animation
+
+// Function to create the fireworks effect
+function createFireworks() {
+  const fireworksContainer = document.createElement("div");
+  fireworksContainer.classList.add("fireworks");
+
+  // Add multiple sparks to the fireworks container
+  for (let i = 0; i < 10; i++) {
+    const spark = document.createElement("div");
+    spark.classList.add("firework-spark");
+    const angle = Math.random() * 360;
+    const distance = Math.random() * 50 + 50;
+    const duration = Math.random() * 0.5 + 1;
+    spark.style.animationDuration = `${duration}s`;
+
+    const x = Math.cos(angle) * distance;
+    const y = Math.sin(angle) * distance;
+    spark.style.transform = `translate(-50%, -50%) translate(${x}px, ${y}px)`;
+
+    fireworksContainer.appendChild(spark);
+  }
+
+  document.body.appendChild(fireworksContainer);
+
+  setTimeout(() => {
+    fireworksContainer.remove();
+  }, 2000);
+}
+
+// Check if the score reaches 10 and trigger fireworks
+function checkScoreForFireworks() {
+  if (score === 10) {
+    createFireworks();
+    showBonusMessage("Fireworks! 10 Points!", "gold");
+  }
+}
+
+// Detect user clicks on the circle and update the score
+circle.addEventListener("click", () => {
+  score++;
+  scoreDisplay.textContent = `Score: ${score}`;
+
+  // Check if the score is 10 and trigger fireworks animation
+  checkScoreForFireworks();
+});
 
 window.onload = titleScreen;
