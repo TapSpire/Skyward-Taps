@@ -22,7 +22,7 @@ body, html {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #ff00ff;
+  background-color: #aa00ff;
 }
 
 .game-info {
