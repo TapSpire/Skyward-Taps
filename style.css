@@ -26,18 +26,11 @@ body, html {
   overflow: hidden;
 }
 
-
-
 #circle {
-  /* remove padding */
   padding: 0;
-
-  /* flexbox centering remains */
   display: flex;
   justify-content: center;
   align-items: center;
-
-  /* relative for inner positioning */
   position: absolute;
   width: 120px;
   height: 120px;
@@ -51,19 +44,17 @@ body, html {
   word-break: break-word;
   border-radius: 50%;
   line-height: 1.2;
-  font-size: 16px;
+  font-size: 32px;  /* Increased font size */
 }
 
 /* text wrapper inside circle */
 #circle > span {
-  padding: 5px; /* breathing space */
+  padding: 5px;
   display: inline-block;
   max-width: 100%;
   box-sizing: border-box;
-  /* vertical centering hack */
-  line-height: normal; /* reset line-height */
+  line-height: normal;
 }
-
 
 #circle:active {
   background: #e5533d;
@@ -110,4 +101,3 @@ button:hover {
   0% { opacity: 1; }
   100% { opacity: 0; }
 }
-
