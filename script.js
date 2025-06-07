@@ -57,15 +57,16 @@ let score = 0;
 let timeLeft = 30;
 let gameInterval;
 let timerInterval;
-let moveCount = 0;  // Track how many moves happened
-let isMoving = false;  // To prevent overlapping movement
-let bonusMessageVisible = false;  // Flag to track if bonus message is visible
+let moveCount = 0;
+let isMoving = false;
+let bonusMessageVisible = false;
+
+let difficulty = "Medium";  // Default difficulty
 
 const normalSize = 120;
 const bigSize = 240;
 
-function getRandomPosition(circleSize) 
-{
+function getRandomPosition(circleSize) {
   const containerRect = gameContainer.getBoundingClientRect();
   const x = Math.random() * (containerRect.width - circleSize);
   const y = Math.random() * (containerRect.height - circleSize - 200) + 200;
@@ -73,36 +74,30 @@ function getRandomPosition(circleSize)
 }
 
 function getRandomWord() {
-  if (Math.random() < 0.5) 
-  {
+  if (Math.random() < 0.5) {
     currentWord = correctWords[Math.floor(Math.random() * correctWords.length)];
-  } 
-  else 
-  {
+  } else {
     currentWord = incorrectWords[Math.floor(Math.random() * incorrectWords.length)];
   }
   return currentWord;
 }
 
-function adjustCircleSize(word) 
-{
-  const maxWidth = 0.8 * gameContainer.clientWidth;  // Max width to avoid overflow
+function adjustCircleSize(word) {
+  const maxWidth = 0.8 * gameContainer.clientWidth;
   const wordLength = word.length;
   const fontSize = parseInt(window.getComputedStyle(circle).fontSize);
-  const estimatedWidth = wordLength * fontSize * 0.6;  // Estimation based on character width
+  const estimatedWidth = wordLength * fontSize * 0.6;
 
-  const newSize = Math.min(estimatedWidth + 40, maxWidth);  // Adjust size based on word length
-
+  const newSize = Math.min(estimatedWidth + 40, maxWidth);
   circle.style.width = `${newSize}px`;
   circle.style.height = `${newSize}px`;
 }
 
 function moveCircle() {
-  if (isMoving) return;  // Prevent overlap if already moving
+  if (isMoving) return;
   isMoving = true;
 
   moveCount++;
-
   const isBig = moveCount % 7 === 0;
   const circleSize = isBig ? bigSize : normalSize;
   circle.style.width = `${circleSize}px`;
@@ -114,18 +109,17 @@ function moveCircle() {
   circle.style.top = `${y}px`;
 
   const randomWord = getRandomWord();
-  adjustCircleSize(randomWord);  // Adjust the circle size based on the word length
+  adjustCircleSize(randomWord);
   circle.innerHTML = `<span>${randomWord}</span>`;
-
   circle.dataset.isBig = isBig ? 'true' : 'false';
 
   setTimeout(() => {
-    isMoving = false;  // Allow the next move after the current one completes
-  }, 3000);  // Set the timeout to match the interval
+    isMoving = false;
+  }, 3000);
 }
 
 function showBonusMessage(message, color) {
-  if (bonusMessageVisible) return;  // Don't show if a message is already visible
+  if (bonusMessageVisible) return;
   bonusMessageVisible = true;
 
   const bonusMessage = document.createElement('div');
@@ -136,19 +130,39 @@ function showBonusMessage(message, color) {
 
   setTimeout(() => {
     bonusMessage.remove();
-    bonusMessageVisible = false;  // Allow next message to show after timeout
+    bonusMessageVisible = false;
   }, 3000);
+}
+
+function titleScreen() {
+  gameContainer.innerHTML = `<h1>Tapspire</h1>`;
+  
+  const easyBtn = document.createElement("button");
+  easyBtn.textContent = "Easy";
+  easyBtn.onclick = () => { difficulty = "Easy"; startGame(); };
+
+  const mediumBtn = document.createElement("button");
+  mediumBtn.textContent = "Medium";
+  mediumBtn.onclick = () => { difficulty = "Medium"; startGame(); };
+
+  const hardBtn = document.createElement("button");
+  hardBtn.textContent = "Hard";
+  hardBtn.onclick = () => { difficulty = "Hard"; startGame(); };
+
+  gameContainer.appendChild(easyBtn);
+  gameContainer.appendChild(mediumBtn);
+  gameContainer.appendChild(hardBtn);
 }
 
 function startGame() {
   score = 0;
-  timeLeft = 60;
+  timeLeft = difficulty === "Easy" ? 60 : difficulty === "Medium" ? 45 : 30;
   scoreDisplay.textContent = `Score: ${score}`;
   timerDisplay.textContent = `Time: ${timeLeft}s`;
   restartBtn.style.display = "none";
   circle.style.display = "block";
 
-  moveCircle();  // Move the circle immediately after game starts
+  moveCircle();
 
   gameInterval = setInterval(() => {
     moveCircle();
@@ -171,32 +185,6 @@ function endGame() {
   timerDisplay.textContent = `Game Over! Final Score: ${score}`;
 }
 
-circle.addEventListener("click", () => {
-  if (timeLeft > 0) {
-    const isBig = circle.dataset.isBig === 'true';
-
-    if (correctWords.includes(currentWord)) {
-      if (isBig) {
-        score += 3;
-        showBonusMessage("AWESOME! 1 pt + 2 BONUS!", "lightgreen");
-      } else {
-        score += 1;
-        showBonusMessage("Good! +1 pt scored", "lightgreen");
-      }
-    } else {
-      score--;
-      if (score < 0) {
-        score = 0;
-        endGame();
-      }
-      showBonusMessage("Ouch!!!! -1 pt lost", "red");
-    }
-
-    scoreDisplay.textContent = `Score: ${score}`;
-    moveCircle();  // Trigger move after a click, but prevent overlap
-  }
-});
-
 restartBtn.addEventListener("click", startGame);
 
-window.onload = startGame;
+window.onload = titleScreen;
