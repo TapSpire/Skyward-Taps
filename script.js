@@ -157,11 +157,15 @@ circle.addEventListener("click", () => {
   if (timeLeft > 0) {
     const isBig = circle.dataset.isBig === 'true';
 
-    if (correctWords.includes(currentWord)) {
-      if (isBig) {
+    if (correctWords.includes(currentWord)) 
+    {
+      if (isBig) 
+      {
         score += 3;
         showBonusMessage("AWESOME! 1 pt + 2 BONUS!", "lightgreen");
-      } else {
+      } 
+      else 
+      {
         score += 1;
         showBonusMessage("Good! +1 pt scored", "lightgreen");
       }
