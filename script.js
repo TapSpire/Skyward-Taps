@@ -52,73 +52,53 @@ const incorrectWords = [
   "Whereever", "Wich", "Withold", "Writting", "Yeild"
 ];
 
-
 let currentWord = "";
 let score = 0;
 let timeLeft = 30;
 let gameInterval;
 let timerInterval;
-
 let moveCount = 0;  // Track how many moves happened
 
 const normalSize = 120;
 const bigSize = 240;
 
-function getRandomPosition(circleSize) 
-{
+function getRandomPosition(circleSize) {
   const containerRect = gameContainer.getBoundingClientRect();
-
-  // Use passed circleSize to get a valid position so it stays inside container
   const x = Math.random() * (containerRect.width - circleSize);
   const y = Math.random() * (containerRect.height - circleSize - 200) + 200;
 
   return { x, y };
 }
 
-function getRandomWord() 
-{
-  if (Math.random() < 0.5) 
-  {
+function getRandomWord() {
+  if (Math.random() < 0.5) {
     currentWord = correctWords[Math.floor(Math.random() * correctWords.length)];
-  } 
-  else 
-  {
+  } else {
     currentWord = incorrectWords[Math.floor(Math.random() * incorrectWords.length)];
   }
   return currentWord;
 }
 
-function moveCircle() 
-{
+function moveCircle() {
   moveCount++;
 
-  // Every 7th move, make circle big
   const isBig = moveCount % 7 === 0;
-
   const circleSize = isBig ? bigSize : normalSize;
-
-  // Update circle size style (width, height, border-radius)
   circle.style.width = `${circleSize}px`;
   circle.style.height = `${circleSize}px`;
-  circle.style.borderRadius = '50%';  // keep circle shape
+  circle.style.borderRadius = '50%';
 
-  // Get position based on new size
   const { x, y } = getRandomPosition(circleSize);
-
-  // Set position
   circle.style.left = `${x}px`;
   circle.style.top = `${y}px`;
 
-  // Set word text
   const randomWord = getRandomWord();
   circle.innerHTML = `<span>${randomWord}</span>`;
 
-  // Save size info on circle for use in click handler (optional)
   circle.dataset.isBig = isBig ? 'true' : 'false';
 }
 
-function startGame() 
-{
+function startGame() {
   score = 0;
   timeLeft = 60;
   scoreDisplay.textContent = `Score: ${score}`;
@@ -149,26 +129,36 @@ function endGame() {
   timerDisplay.textContent = `Game Over! Final Score: ${score}`;
 }
 
-circle.addEventListener("click", () => 
-  {
-  if (timeLeft > 0) 
-  {
+function showBonusMessage() {
+  const bonusMessage = document.createElement('div');
+  bonusMessage.classList.add('bonus-message');
+  bonusMessage.textContent = "1 point + 2 BONUS!";
+  document.body.appendChild(bonusMessage);
+
+  setTimeout(() => {
+    bonusMessage.remove();
+  }, 2000);
+}
+
+circle.addEventListener("click", () => {
+  if (timeLeft > 0) {
     const isBig = circle.dataset.isBig === 'true';
 
-    if (correctWords.includes(currentWord)) 
-    {
-      // If big circle, +3 points; else +1
-      score += isBig ? 3 : 1;
-    } 
-    else 
-    {
+    if (correctWords.includes(currentWord)) {
+      if (isBig) {
+        score += 3;
+        showBonusMessage();  // Show bonus message for big circle
+      } else {
+        score += 1;
+      }
+    } else {
       score--;
-      if (score < 0) 
-      {
+      if (score < 0) {
         score = 0;
         endGame();
       }
     }
+
     scoreDisplay.textContent = `Score: ${score}`;
     moveCircle();
   }
@@ -176,5 +166,4 @@ circle.addEventListener("click", () =>
 
 restartBtn.addEventListener("click", startGame);
 
-// Start the game automatically when the page loads
 window.onload = startGame;
