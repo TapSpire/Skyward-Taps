@@ -105,6 +105,18 @@ function moveCircle() {
   }, 3000);  // Set the timeout to match the interval
 }
 
+function showBonusMessage(message, color) {
+  const bonusMessage = document.createElement('div');
+  bonusMessage.classList.add('bonus-message');
+  bonusMessage.textContent = message;
+  bonusMessage.style.color = color;
+  document.body.appendChild(bonusMessage);
+
+  setTimeout(() => {
+    bonusMessage.remove();
+  }, 5000);
+}
+
 function startGame() {
   score = 0;
   timeLeft = 60;
@@ -136,17 +148,6 @@ function endGame() {
   timerDisplay.textContent = `Game Over! Final Score: ${score}`;
 }
 
-function showBonusMessage() {
-  const bonusMessage = document.createElement('div');
-  bonusMessage.classList.add('bonus-message');
-  bonusMessage.textContent = "1 point + 2 BONUS!";
-  document.body.appendChild(bonusMessage);
-
-  setTimeout(() => {
-    bonusMessage.remove();
-  }, 5000);
-}
-
 circle.addEventListener("click", () => {
   if (timeLeft > 0) {
     const isBig = circle.dataset.isBig === 'true';
@@ -154,9 +155,10 @@ circle.addEventListener("click", () => {
     if (correctWords.includes(currentWord)) {
       if (isBig) {
         score += 3;
-        showBonusMessage();  // Show bonus message for big circle
+        showBonusMessage("1 point + 2 BONUS!", "lightgreen");
       } else {
         score += 1;
+        showBonusMessage("+1 point", "lightgreen");
       }
     } else {
       score--;
@@ -164,6 +166,7 @@ circle.addEventListener("click", () => {
         score = 0;
         endGame();
       }
+      showBonusMessage("Ouch!!!! -1 point", "red");
     }
 
     scoreDisplay.textContent = `Score: ${score}`;
@@ -174,4 +177,3 @@ circle.addEventListener("click", () => {
 restartBtn.addEventListener("click", startGame);
 
 window.onload = startGame;
-
