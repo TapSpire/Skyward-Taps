@@ -58,6 +58,7 @@ let timeLeft = 30;
 let gameInterval;
 let timerInterval;
 let moveCount = 0;  // Track how many moves happened
+let isMoving = false;  // To prevent overlapping movement
 
 const normalSize = 120;
 const bigSize = 240;
@@ -66,7 +67,6 @@ function getRandomPosition(circleSize) {
   const containerRect = gameContainer.getBoundingClientRect();
   const x = Math.random() * (containerRect.width - circleSize);
   const y = Math.random() * (containerRect.height - circleSize - 200) + 200;
-
   return { x, y };
 }
 
@@ -80,6 +80,9 @@ function getRandomWord() {
 }
 
 function moveCircle() {
+  if (isMoving) return;  // Prevent overlap if already moving
+  isMoving = true;
+
   moveCount++;
 
   const isBig = moveCount % 7 === 0;
@@ -96,6 +99,10 @@ function moveCircle() {
   circle.innerHTML = `<span>${randomWord}</span>`;
 
   circle.dataset.isBig = isBig ? 'true' : 'false';
+
+  setTimeout(() => {
+    isMoving = false;  // Allow the next move after the current one completes
+  }, 3000);  // Set the timeout to match the interval
 }
 
 function startGame() {
@@ -106,7 +113,7 @@ function startGame() {
   restartBtn.style.display = "none";
   circle.style.display = "block";
 
-  moveCircle();
+  moveCircle();  // Move the circle immediately after game starts
 
   gameInterval = setInterval(() => {
     moveCircle();
@@ -160,10 +167,11 @@ circle.addEventListener("click", () => {
     }
 
     scoreDisplay.textContent = `Score: ${score}`;
-    moveCircle();
+    moveCircle();  // Trigger move after a click, but prevent overlap
   }
 });
 
 restartBtn.addEventListener("click", startGame);
 
 window.onload = startGame;
+
