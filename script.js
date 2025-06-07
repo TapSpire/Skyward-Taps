@@ -80,6 +80,18 @@ function getRandomWord() {
   return currentWord;
 }
 
+function adjustCircleSize(word) {
+  const maxWidth = 0.8 * gameContainer.clientWidth;  // Max width to avoid overflow
+  const wordLength = word.length;
+  const fontSize = parseInt(window.getComputedStyle(circle).fontSize);
+  const estimatedWidth = wordLength * fontSize * 0.6;  // Estimation based on character width
+
+  const newSize = Math.min(estimatedWidth + 40, maxWidth);  // Adjust size based on word length
+
+  circle.style.width = `${newSize}px`;
+  circle.style.height = `${newSize}px`;
+}
+
 function moveCircle() {
   if (isMoving) return;  // Prevent overlap if already moving
   isMoving = true;
@@ -97,6 +109,7 @@ function moveCircle() {
   circle.style.top = `${y}px`;
 
   const randomWord = getRandomWord();
+  adjustCircleSize(randomWord);  // Adjust the circle size based on the word length
   circle.innerHTML = `<span>${randomWord}</span>`;
 
   circle.dataset.isBig = isBig ? 'true' : 'false';
@@ -106,8 +119,7 @@ function moveCircle() {
   }, 3000);  // Set the timeout to match the interval
 }
 
-function showBonusMessage(message, color) 
-{
+function showBonusMessage(message, color) {
   if (bonusMessageVisible) return;  // Don't show if a message is already visible
   bonusMessageVisible = true;
 
@@ -158,15 +170,11 @@ circle.addEventListener("click", () => {
   if (timeLeft > 0) {
     const isBig = circle.dataset.isBig === 'true';
 
-    if (correctWords.includes(currentWord)) 
-    {
-      if (isBig) 
-      {
+    if (correctWords.includes(currentWord)) {
+      if (isBig) {
         score += 3;
         showBonusMessage("AWESOME! 1 pt + 2 BONUS!", "lightgreen");
-      } 
-      else 
-      {
+      } else {
         score += 1;
         showBonusMessage("Good! +1 pt scored", "lightgreen");
       }
