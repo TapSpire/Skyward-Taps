@@ -222,11 +222,20 @@ function checkScoreForFireworks() {
 
 // Detect user clicks on the circle and update the score
 circle.addEventListener("click", () => {
-  score++;
-  scoreDisplay.textContent = `Score: ${score}`;
+  if (correctWords.includes(currentWord)) 
+  {
+    score++;
+    showBonusMessage("Correct!", "green");
+  } 
+  else if (incorrectWords.includes(currentWord)) 
+  {
+    score--;
+    showBonusMessage("Oops! That's a misspelling!", "red");
+  }
 
-  // Check if the score is 10 and trigger fireworks animation
+  scoreDisplay.textContent = `Score: ${score}`;
   checkScoreForFireworks();
 });
+
 
 
