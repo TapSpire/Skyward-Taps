@@ -64,7 +64,8 @@ let bonusMessageVisible = false;  // Flag to track if bonus message is visible
 const normalSize = 120;
 const bigSize = 240;
 
-function getRandomPosition(circleSize) {
+function getRandomPosition(circleSize) 
+{
   const containerRect = gameContainer.getBoundingClientRect();
   const x = Math.random() * (containerRect.width - circleSize);
   const y = Math.random() * (containerRect.height - circleSize - 200) + 200;
@@ -72,15 +73,19 @@ function getRandomPosition(circleSize) {
 }
 
 function getRandomWord() {
-  if (Math.random() < 0.5) {
+  if (Math.random() < 0.5) 
+  {
     currentWord = correctWords[Math.floor(Math.random() * correctWords.length)];
-  } else {
+  } 
+  else 
+  {
     currentWord = incorrectWords[Math.floor(Math.random() * incorrectWords.length)];
   }
   return currentWord;
 }
 
-function adjustCircleSize(word) {
+function adjustCircleSize(word) 
+{
   const maxWidth = 0.8 * gameContainer.clientWidth;  // Max width to avoid overflow
   const wordLength = word.length;
   const fontSize = parseInt(window.getComputedStyle(circle).fontSize);
