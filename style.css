@@ -35,8 +35,8 @@ body, html {
 
 .game-container {
   position: relative;
-  width: 600px;
-  height: 400px;
+  width: 360px;
+  height: 640px;
   border: 1px solid black;
   overflow: hidden;
   margin: 0 auto;
@@ -48,26 +48,26 @@ body, html {
 }
 
 #circle {
-  padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   position: absolute;
-  width: 120px;
-  height: 120px;
-  background-color: orange;
+  padding: 20px; /* Adjust to control spacing inside the circle */
+  width: auto;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  background-color: rgba(255, 165, 0, 0.2); /* Orange with 0.2 opacity */
   color: white;
   font-weight: bold;
   cursor: pointer;
   text-align: center;
-  overflow: hidden;
   white-space: nowrap;
   word-break: break-word;
   border-radius: 50%;
-  line-height: 1.2;
   font-size: 32px;
   transition: width 0.3s, height 0.3s;
 }
+
 
 button {
   margin-top: 20px;
