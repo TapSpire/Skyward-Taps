@@ -106,7 +106,8 @@ function moveCircle() {
   }, 3000);  // Set the timeout to match the interval
 }
 
-function showBonusMessage(message, color) {
+function showBonusMessage(message, color) 
+{
   if (bonusMessageVisible) return;  // Don't show if a message is already visible
   bonusMessageVisible = true;
 
