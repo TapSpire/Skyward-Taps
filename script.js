@@ -160,13 +160,17 @@ function titleScreen() {
 
 
 function startGame() {
+  // Reset the UI content
   score = 0;
   timeLeft = difficulty === "Easy" ? 120 : difficulty === "Medium" ? 60 : 40;
   scoreDisplay.textContent = `Score: ${score}`;
   timerDisplay.textContent = `Time: ${timeLeft}s`;
+  
+  // Hide the title screen buttons and display the game elements
   restartBtn.style.display = "none";
-  circle.style.display = "block";
+  circle.style.display = "block"; // Show the circle
 
+  // Now the game starts with the corresponding difficulty level
   moveCircle();
 
   gameInterval = setInterval(() => {
@@ -181,6 +185,7 @@ function startGame() {
     }
   }, 1000);
 }
+
 
 function endGame() {
   clearInterval(gameInterval);
