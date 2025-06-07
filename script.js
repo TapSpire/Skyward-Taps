@@ -134,7 +134,8 @@ function showBonusMessage(message, color) {
   }, 3000);
 }
 
-function titleScreen() {
+function titleScreen() 
+{
   gameContainer.innerHTML = `<h1>Tapspire</h1>`;
   
   const easyBtn = document.createElement("button");
