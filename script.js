@@ -163,7 +163,7 @@ circle.addEventListener("click", () => {
         showBonusMessage("AWESOME! 1 pt + 2 BONUS!", "lightgreen");
       } else {
         score += 1;
-        showBonusMessage("Good! +1 pt", "lightgreen");
+        showBonusMessage("Good! +1 pt scored", "lightgreen");
       }
     } else {
       score--;
@@ -171,7 +171,7 @@ circle.addEventListener("click", () => {
         score = 0;
         endGame();
       }
-      showBonusMessage("Ouch!!!! -1 point", "red");
+      showBonusMessage("Ouch!!!! -1 pt lost", "red");
     }
 
     scoreDisplay.textContent = `Score: ${score}`;
