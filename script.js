@@ -86,7 +86,7 @@ function moveCircle() {
   const circleSize = isBig ? bigSize : normalSize;
   circle.style.width = `${circleSize}px`;
   circle.style.height = `${circleSize}px`;
-  circle.style.borderRadius = '50%';
+  circle.style.borderRadius = '10%';
 
   const { x, y } = getRandomPosition(circleSize);
   circle.style.left = `${x}px`;
@@ -110,7 +110,7 @@ function startGame() {
 
   gameInterval = setInterval(() => {
     moveCircle();
-  }, 3000);
+  }, 5000);
 
   timerInterval = setInterval(() => {
     timeLeft--;
@@ -137,7 +137,7 @@ function showBonusMessage() {
 
   setTimeout(() => {
     bonusMessage.remove();
-  }, 2000);
+  }, 5000);
 }
 
 circle.addEventListener("click", () => {
