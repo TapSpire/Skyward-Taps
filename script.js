@@ -59,6 +59,7 @@ let gameInterval;
 let timerInterval;
 let moveCount = 0;  // Track how many moves happened
 let isMoving = false;  // To prevent overlapping movement
+let bonusMessageVisible = false;  // Flag to track if bonus message is visible
 
 const normalSize = 120;
 const bigSize = 240;
@@ -106,6 +107,9 @@ function moveCircle() {
 }
 
 function showBonusMessage(message, color) {
+  if (bonusMessageVisible) return;  // Don't show if a message is already visible
+  bonusMessageVisible = true;
+
   const bonusMessage = document.createElement('div');
   bonusMessage.classList.add('bonus-message');
   bonusMessage.textContent = message;
@@ -114,6 +118,7 @@ function showBonusMessage(message, color) {
 
   setTimeout(() => {
     bonusMessage.remove();
+    bonusMessageVisible = false;  // Allow next message to show after timeout
   }, 5000);
 }
 
