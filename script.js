@@ -61,28 +61,34 @@ let moveCount = 0;
 let isMoving = false;
 let bonusMessageVisible = false;
 
-let difficulty = "Medium";  // Default difficulty
+let difficulty = "Easy";  // Default difficulty
 
 const normalSize = 120;
 const bigSize = 240;
 
-function getRandomPosition(circleSize) {
+function getRandomPosition(circleSize) 
+{
   const containerRect = gameContainer.getBoundingClientRect();
   const x = Math.random() * (containerRect.width - circleSize);
   const y = Math.random() * (containerRect.height - circleSize - 200) + 200;
   return { x, y };
 }
 
-function getRandomWord() {
-  if (Math.random() < 0.5) {
+function getRandomWord() 
+{
+  if (Math.random() < 0.5) 
+  {
     currentWord = correctWords[Math.floor(Math.random() * correctWords.length)];
-  } else {
+  } 
+  else 
+  {
     currentWord = incorrectWords[Math.floor(Math.random() * incorrectWords.length)];
   }
   return currentWord;
 }
 
-function adjustCircleSize(word) {
+function adjustCircleSize(word) 
+{
   const maxWidth = 0.8 * gameContainer.clientWidth;
   const wordLength = word.length;
   const fontSize = parseInt(window.getComputedStyle(circle).fontSize);
@@ -93,7 +99,8 @@ function adjustCircleSize(word) {
   circle.style.height = `${newSize}px`;
 }
 
-function moveCircle() {
+function moveCircle() 
+{
   if (isMoving) return;
   isMoving = true;
 
@@ -113,12 +120,14 @@ function moveCircle() {
   circle.innerHTML = `<span>${randomWord}</span>`;
   circle.dataset.isBig = isBig ? 'true' : 'false';
 
-  setTimeout(() => {
+  setTimeout(() => 
+  {
     isMoving = false;
   }, 3000);
 }
 
-function showBonusMessage(message, color) {
+function showBonusMessage(message, color) 
+{
   if (bonusMessageVisible) return;
   bonusMessageVisible = true;
 
@@ -128,44 +137,15 @@ function showBonusMessage(message, color) {
   bonusMessage.style.color = color;
   document.body.appendChild(bonusMessage);
 
-  setTimeout(() => {
+  setTimeout(() => 
+  {
     bonusMessage.remove();
     bonusMessageVisible = false;
   }, 3000);
 }
 
-function titleScreen() {
-  gameContainer.innerHTML = `
-    <h1>Tapspire!</h1>
-  `;
-
-  const easyBtn = document.createElement("button");
-  easyBtn.textContent = "Easy";
-  easyBtn.addEventListener('click', () => {
-    difficulty = "Easy";
-    startGame();
-  });
-
-  const mediumBtn = document.createElement("button");
-  mediumBtn.textContent = "Medium";
-  mediumBtn.addEventListener('click', () => {
-    difficulty = "Medium";
-    startGame();
-  });
-
-  const hardBtn = document.createElement("button");
-  hardBtn.textContent = "Hard";
-  hardBtn.addEventListener('click', () => {
-    difficulty = "Hard";
-    startGame();
-  });
-
-  gameContainer.appendChild(easyBtn);
-  gameContainer.appendChild(mediumBtn);
-  gameContainer.appendChild(hardBtn);
-}
-
-function startGame() {
+function startGame() 
+{
   score = 0;
   timeLeft = difficulty === "Easy" ? 120 : difficulty === "Medium" ? 60 : 40;
   scoreDisplay.textContent = `Score: ${score}`;
@@ -183,7 +163,8 @@ function startGame() {
   timerInterval = setInterval(() => {
     timeLeft--;
     timerDisplay.textContent = `Time: ${timeLeft}s`;
-    if (timeLeft <= 0) {
+    if (timeLeft <= 0) 
+    {
       endGame();
     }
   }, 1000);
@@ -199,7 +180,7 @@ function endGame() {
 
 restartBtn.addEventListener("click", startGame);
 
-window.onload = titleScreen;
+window.onload = startGame;
 
 // Fireworks Animation
 
