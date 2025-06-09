@@ -54,6 +54,9 @@ const incorrectWords = [
 
 let currentWord = "";
 let score = 0;
+let awarded_5 = false;
+let awarded_10 = false;
+let awarded_25 = false;
 let timeLeft = 30;
 let gameInterval;
 let timerInterval;
@@ -214,10 +217,23 @@ function createFireworks() {
 
 // Check if the score reaches 10 and trigger fireworks
 function checkScoreForFireworks() {
-  if (score === 5) {
+  if (score === 5 && awarded_5 == false) {
     createFireworks();
     showBonusMessage("Fireworks! 30-second BONUS!", "gold");
     timeLeft +=30;
+    awarded_5 = true;
+  }
+    if (score === 10 && awarded_10 == false) {
+    createFireworks();
+    showBonusMessage("Fireworks!60-second BONUS!", "gold");
+    timeLeft +=60;
+    awarded_10 = true;
+  }
+    if (score === 25 && awarded_10 == false) {
+    createFireworks();
+    showBonusMessage("Fireworks! 120-second BONUS!", "gold");
+    timeLeft +=30;
+    awarded_120 = true;
   }
 }
 
