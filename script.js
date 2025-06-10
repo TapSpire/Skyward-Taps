@@ -254,9 +254,14 @@ circle.addEventListener("click", () => {
   let hoverText = document.createElement("div");
   hoverText.classList.add("hover-feedback");
 
+  const correctSound = document.getElementById("correct-sound");
+  const clickSound = document.getElementById("click-sound");
+
   if (correctWords.includes(currentWord)) 
   {
     score++;
+    correctSound.currentTime = 0;
+    correctSound.play();
     showBonusMessage("Correct!", "green");
     hoverText.textContent = "Good!";
     hoverText.style.color = "green";
@@ -264,12 +269,14 @@ circle.addEventListener("click", () => {
   else if (incorrectWords.includes(currentWord)) 
   {
     score--;
+    clickSound.currentTime = 0;
+    clickSound.play();
     showBonusMessage("Oops! That's a misspelling!", "red");
     hoverText.textContent = "Ouch!!!!";
     hoverText.style.color = "red";
   }
 
-  // Position hover text above the circle
+  // Position and animate hover text
   const circleRect = circle.getBoundingClientRect();
   hoverText.style.position = "absolute";
   hoverText.style.left = `${circleRect.left + circleRect.width / 2}px`;
@@ -284,7 +291,6 @@ circle.addEventListener("click", () => {
 
   document.body.appendChild(hoverText);
 
-  // Animate and remove
   setTimeout(() => {
     hoverText.style.opacity = "0";
     hoverText.style.transform = "translateX(-50%) translateY(-30px)";
@@ -297,6 +303,7 @@ circle.addEventListener("click", () => {
   scoreDisplay.textContent = `Score: ${score}`;
   checkScoreForFireworks();
 });
+
 
 
 
