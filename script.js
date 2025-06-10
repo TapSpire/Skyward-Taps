@@ -228,26 +228,34 @@ function checkScoreForFireworks()
   {
     createFireworks();
     showBonusMessage("Fireworks! 30-second BONUS!", "gold");
-    timeLeft +=30;
+    timeLeft += 30;
     awarded_5 = true;
+    bonusSound.currentTime = 0;
+    bonusSound.play();
   }
-  
+
   if (score === 10 && awarded_10 == false) 
   {
     createFireworks();
-    showBonusMessage("Fireworks!60-second BONUS!", "gold");
-    timeLeft +=60;
+    showBonusMessage("Fireworks! 60-second BONUS!", "gold");
+    timeLeft += 60;
     awarded_10 = true;
+    bonusSound.currentTime = 0;
+    bonusSound.play();
   }
-  
+
   if (score === 25 && awarded_25 == false) 
   {
     createFireworks();
     showBonusMessage("Fireworks! 120-second BONUS!", "gold");
-    timeLeft +=120;
+    timeLeft += 120;
     awarded_25 = true;
+    bonusSound.currentTime = 0;
+    bonusSound.play();
   }
 }
+
+
 
 // Detect user clicks on the circle and update the score
 circle.addEventListener("click", () => {
@@ -256,6 +264,7 @@ circle.addEventListener("click", () => {
 
   const correctSound = document.getElementById("correct-sound");
   const clickSound = document.getElementById("click-sound");
+  const bonusSound = document.getElementById("bonus-sound");
 
   if (correctWords.includes(currentWord)) 
   {
