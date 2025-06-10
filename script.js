@@ -198,7 +198,8 @@ function createFireworks() {
   fireworksContainer.classList.add("fireworks");
 
   // Add multiple sparks to the fireworks container
-  for (let i = 0; i < 10; i++) {
+  for (let i = 0; i < 10; i++) 
+  {
     const spark = document.createElement("div");
     spark.classList.add("firework-spark");
     const angle = Math.random() * 360;
@@ -221,20 +222,26 @@ function createFireworks() {
 }
 
 // Check if the score reaches 10 and trigger fireworks
-function checkScoreForFireworks() {
-  if (score === 5 && awarded_5 == false) {
+function checkScoreForFireworks() 
+{
+  if (score === 5 && awarded_5 == false) 
+  {
     createFireworks();
     showBonusMessage("Fireworks! 30-second BONUS!", "gold");
     timeLeft +=30;
     awarded_5 = true;
   }
-    if (score === 10 && awarded_10 == false) {
+  
+  if (score === 10 && awarded_10 == false) 
+  {
     createFireworks();
     showBonusMessage("Fireworks!60-second BONUS!", "gold");
     timeLeft +=60;
     awarded_10 = true;
   }
-    if (score === 25 && awarded_10 == false) {
+  
+  if (score === 25 && awarded_10 == false) 
+  {
     createFireworks();
     showBonusMessage("Fireworks! 120-second BONUS!", "gold");
     timeLeft +=30;
