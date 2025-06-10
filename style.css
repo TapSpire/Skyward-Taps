@@ -13,8 +13,8 @@ body, html {
 
 .game-container {
   position: relative;
-  width: 360px;
-  height: 640px;
+  width: 100vw;
+  height: 100vh;
   border: 1px solid black;
   overflow: hidden;
   margin: 0 auto;
