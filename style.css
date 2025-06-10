@@ -31,13 +31,13 @@ body, html {
   text-align: center;
   font-size: 1.2rem;
   font-weight: bold;
-  font-family: 'Press Start 2P', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: white;
 }
 
 #score, #timer, #finalScore {
   display: inline-block;
   margin: 0 10px;
+  font-family: 'Press Start 2P', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: white;
 }
 
 .game-main {
