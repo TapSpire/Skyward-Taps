@@ -237,13 +237,6 @@ function checkScoreForFireworks() {
   }
 }
 
-  function playClickSound() 
-  {
-    const sound = document.getElementById('click-sound');
-    sound.currentTime = 0; // Reset to start
-    sound.play();
-  }
-
 // Detect user clicks on the circle and update the score
 circle.addEventListener("click", () => {
   let hoverText = document.createElement("div");
