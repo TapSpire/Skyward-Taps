@@ -240,12 +240,12 @@ function checkScoreForFireworks()
     awarded_10 = true;
   }
   
-  if (score === 25 && awarded_10 == false) 
+  if (score === 25 && awarded_25 == false) 
   {
     createFireworks();
     showBonusMessage("Fireworks! 120-second BONUS!", "gold");
-    timeLeft +=30;
-    awarded_120 = true;
+    timeLeft +=120;
+    awarded_25 = true;
   }
 }
 
