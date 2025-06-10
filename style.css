@@ -10,10 +10,7 @@ body, html {
   background: #f0f8ff;
   overflow: hidden;
 
-  background-image: url('background.jpg');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+
 }
 
 .game-container {
@@ -28,6 +25,10 @@ body, html {
   flex-direction: column;
   align-items: center;
   background-color: #aa00ff;
+  background-image: url('background.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .game-info {
