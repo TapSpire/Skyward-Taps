@@ -72,8 +72,13 @@ const bigSize = 240;
 function getRandomPosition(circleSize) 
 {
   const containerRect = gameContainer.getBoundingClientRect();
-  const x = Math.random() * (containerRect.width - circleSize);
-  const y = Math.random() * (containerRect.height - circleSize - 200) + 200;
+  const paddingTop = 100; // space for header & timer
+  const maxX = containerRect.width - circleSize;
+  const maxY = containerRect.height - circleSize - paddingTop;
+
+  const x = Math.random() * maxX;
+  const y = Math.random() * maxY + paddingTop;
+
   return { x, y };
 }
 
