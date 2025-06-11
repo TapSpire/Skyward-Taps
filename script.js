@@ -3,6 +3,7 @@ const scoreDisplay = document.getElementById("score");
 const timerDisplay = document.getElementById("timer");
 const restartBtn = document.getElementById("restartBtn");
 const gameContainer = document.querySelector(".game-container");
+const bonusSound = document.getElementById("bonus-sound");
 
 const correctWords = [
   "Accommodate", "Achieve", "Across", "Aggressive", "A lot",
@@ -221,11 +222,11 @@ function createFireworks() {
   }, 2000);
 }
 
-const bonusSound = document.getElementById("bonus-sound");
+
 // Check if the score reaches 10 and trigger fireworks
 function checkScoreForFireworks() 
 {
-  if (score === 2 && awarded_5 == false) 
+  if (score === 5 && awarded_5 == false) 
   {
     createFireworks();
     showBonusMessage("Fireworks! 30-second BONUS!", "gold");
