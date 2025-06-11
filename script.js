@@ -3,6 +3,7 @@ const scoreDisplay = document.getElementById("score");
 const timerDisplay = document.getElementById("timer");
 const restartBtn = document.getElementById("restartBtn");
 const gameContainer = document.querySelector(".game-container");
+const bonusSound = document.getElementById("bonus-sound");
 
 const correctWords = [
   "Accommodate", "Achieve", "Across", "Aggressive", "A lot",
@@ -264,7 +265,6 @@ circle.addEventListener("click", () => {
 
   const correctSound = document.getElementById("correct-sound");
   const clickSound = document.getElementById("click-sound");
-  const bonusSound = document.getElementById("bonus-sound");
 
   if (correctWords.includes(currentWord)) 
   {
