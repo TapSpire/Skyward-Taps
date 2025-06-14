@@ -4,13 +4,32 @@ const timerDisplay = document.getElementById("timer");
 const restartBtn = document.getElementById("restartBtn");
 const gameContainer = document.querySelector(".game-container");
 const bonusSound = document.getElementById("bonus-sound");
-
-// Array of images to load into the squares (Replace with your own image URLs)
-const imageUrls = [
-  'https://via.placeholder.com/100', // Placeholder image
-  'https://via.placeholder.com/100/ff0000', // Another placeholder
-  'https://via.placeholder.com/100/00ff00', // Another placeholder
-  'https://via.placeholder.com/100/0000ff'  // Another placeholder
+const textContent = [
+  'Cat',        // Spelling word
+  'Dog',        // Spelling word
+  '3 + 5',      // Math equation
+  'Apple',      // Object for identification
+  '7',          // Math answer
+  'Star',       // Object for identification
+  '10 - 2',     // Math equation
+  'Fish',       // Object for identification
+  '10',         // Math answer
+  'Bird',       // Spelling word
+  '5 + 3',      // Math equation
+  'Banana',     // Object for identification
+  '4 * 2',      // Math equation
+  'Square',     // Shape for identification
+  '10 ÷ 2',     // Math equation
+  'Circle',     // Shape for identification
+  'Hello',      // Word for spelling
+  'Math',       // Subject-related word
+  '7 * 2',      // Math equation
+  'Cloud',      // Object for identification
+  '9 + 1',      // Math equation
+  'Pink',       // Color identification
+  'Shark',      // Animal for identification
+  '9',          // Math number
+  '10',         // Math number
 ];
 
 const correctWords = [
@@ -78,34 +97,32 @@ let difficulty = "Easy";  // Default difficulty
 const normalSize = 120;
 const bigSize = 240;
 
-// Function to create the grid
-function createGrid() {
+function createGrid() 
+{
   const grid = document.querySelector('.grid');
   for (let i = 0; i < 25; i++) { // Create 25 squares
     const square = document.createElement('div');
     square.classList.add('square');
     
-    // Add a click event to load an image into the square
+    const span = document.createElement('span');
+    span.textContent = textContent[i];  // Fill with text from the array
+    square.appendChild(span);
+
+    // Add a click event to animate and change text color
     square.addEventListener('click', function() {
-      loadImage(square);
+      square.classList.toggle('clicked');  // Add effect on click
+      loadText(square);  // Load new text on click
     });
     
     grid.appendChild(square);
   }
 }
 
-// Function to load an image into a clicked square
-function loadImage(square) {
-  // Get a random image URL from the imageUrls array
-  const randomImageUrl = imageUrls[Math.floor(Math.random() * imageUrls.length)];
-
-  // Create an image element and set the src to the random image
-  const img = document.createElement('img');
-  img.src = randomImageUrl;
-
-  // Clear the current contents of the square (if any) and append the image
-  square.innerHTML = ''; // Reset the square
-  square.appendChild(img);
+function loadText(square) 
+{
+  const randomText = textContent[Math.floor(Math.random() * textContent.length)];
+  const span = square.querySelector('span');
+  span.textContent = randomText;  // Update the text
 }
 
 function getRandomPosition(circleSize) 
