@@ -76,15 +76,16 @@ body, html {
   transition: transform 0.2s ease, color 0.3s ease;
 }
 
-.square:hover span {
-  transform: scale(1.1);
-  color: #ffcc00;
+.square.clicked span {
+  color: red;
+  font-style: italic;
+  transform: rotate(-10deg);
 }
 
-/* Optional: Fancy effect when square is clicked */
-.square.clicked span {
-  color: #ff3333;
-  transform: rotate(10deg);
+.square span {
+  color: white;
+  font-style: normal;
+  transform: none;
 }
 
 #circle {
