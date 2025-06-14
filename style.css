@@ -95,9 +95,10 @@ body, html {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 24px;
+  font-size: 36x;
+  font-weight: bold;
   font-family: 'Press Start 2P', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: green;
+  color: white;
   pointer-events: auto;
   transition: all 0.3s ease;
   z-index: 5;
