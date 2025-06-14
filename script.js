@@ -68,8 +68,6 @@ let awarded_60 = false;
 let timeLeft = 120;  // Always starts at 120 seconds
 let gameInterval;
 let timerInterval;
-let moveCount = 0;
-let isMoving = false;
 let bonusMessageVisible = false;
 let lastClickedTextValue = 0;
 
@@ -122,31 +120,6 @@ function getRandomWord()
   return currentWord;
 }
 
-function moveCircle() 
-{
-  if (isMoving) return;
-  isMoving = true;
-
-  moveCount++;
-  const circleSize = normalSize;
-  circle.style.width = `${circleSize}px`;
-  circle.style.height = `${circleSize}px`;
-  circle.style.borderRadius = '10%';
-
-  const { x, y } = getRandomPosition(circleSize);
-  circle.style.left = `${x}px`;
-  circle.style.top = `${y}px`;
-
-  const randomWord = getRandomWord();
-  circle.innerHTML = `<span>${randomWord}</span>`;
-  circle.dataset.isBig = false;
-
-  setTimeout(() => 
-  {
-    isMoving = false;
-  }, 3000);
-}
-
 function showBonusMessage(message, color) 
 {
   if (bonusMessageVisible) return;
@@ -174,13 +147,10 @@ function startGame()
   timerDisplay.textContent = `Time: ${timeLeft}s`;
 
   restartBtn.style.display = "none";
-  circle.style.display = "block";
+  circle.style.display = "none";
 
-  moveCircle();
-
-  gameInterval = setInterval(() => {
-    moveCircle();
-  }, 5000);
+  const randomWord = getRandomWord();
+  document.getElementById("wordHolder").textContent = randomWord;
 
   timerInterval = setInterval(() => {
     timeLeft--;
