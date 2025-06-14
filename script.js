@@ -163,8 +163,9 @@ window.onload = startGame;
 
 // Fireworks Animation
 
-// Function to create the fireworks effect
-function createFireworks() {
+
+function createFireworks() 
+{
   const fireworksContainer = document.createElement("div");
   fireworksContainer.classList.add("fireworks");
 
@@ -190,6 +191,39 @@ function createFireworks() {
   setTimeout(() => {
     fireworksContainer.remove();
   }, 2000);
+}
+
+function checkScoreForFireworks() 
+{
+  if (score === 15 && awarded_15 == false) 
+  {
+    createFireworks();
+    showBonusMessage("TIME-BONUS! 15s", "gold");
+    timeLeft += 15;
+    awarded_15 = true;
+    bonusSound.currentTime = 0;
+    bonusSound.play();
+  }
+
+  if (score === 30 && awarded_30 == false) 
+  {
+    createFireworks();
+    showBonusMessage("TIME-BONUS! 30s", "gold");
+    timeLeft += 30;
+    awarded_30 = true;
+    bonusSound.currentTime = 0;
+    bonusSound.play();
+  }
+
+  if (score === 60 && awarded_60 == false) 
+  {
+    createFireworks();
+    showBonusMessage("TIME-BONUS! 60s", "gold");
+    timeLeft += 60;
+    awarded_60 = true;
+    bonusSound.currentTime = 0;
+    bonusSound.play();
+  }
 }
 
 circle.addEventListener("click", () => {
@@ -245,6 +279,7 @@ circle.addEventListener("click", () => {
   }, 1000);
 
   scoreDisplay.textContent = `Score: ${score}`;
+  checkScoreForFireworks() 
 });
 
 
