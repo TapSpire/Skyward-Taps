@@ -5,6 +5,14 @@ const restartBtn = document.getElementById("restartBtn");
 const gameContainer = document.querySelector(".game-container");
 const bonusSound = document.getElementById("bonus-sound");
 
+// Array of images to load into the squares (Replace with your own image URLs)
+const imageUrls = [
+  'https://via.placeholder.com/100', // Placeholder image
+  'https://via.placeholder.com/100/ff0000', // Another placeholder
+  'https://via.placeholder.com/100/00ff00', // Another placeholder
+  'https://via.placeholder.com/100/0000ff'  // Another placeholder
+];
+
 const correctWords = [
   "Accommodate", "Achieve", "Across", "Aggressive", "A lot",
   "Amateur", "Apparent", "Argument", "Basically", "Beginning",
@@ -69,6 +77,36 @@ let difficulty = "Easy";  // Default difficulty
 
 const normalSize = 120;
 const bigSize = 240;
+
+// Function to create the grid
+function createGrid() {
+  const grid = document.querySelector('.grid');
+  for (let i = 0; i < 25; i++) { // Create 25 squares
+    const square = document.createElement('div');
+    square.classList.add('square');
+    
+    // Add a click event to load an image into the square
+    square.addEventListener('click', function() {
+      loadImage(square);
+    });
+    
+    grid.appendChild(square);
+  }
+}
+
+// Function to load an image into a clicked square
+function loadImage(square) {
+  // Get a random image URL from the imageUrls array
+  const randomImageUrl = imageUrls[Math.floor(Math.random() * imageUrls.length)];
+
+  // Create an image element and set the src to the random image
+  const img = document.createElement('img');
+  img.src = randomImageUrl;
+
+  // Clear the current contents of the square (if any) and append the image
+  square.innerHTML = ''; // Reset the square
+  square.appendChild(img);
+}
 
 function getRandomPosition(circleSize) 
 {
@@ -155,6 +193,7 @@ function showBonusMessage(message, color)
 
 function startGame() 
 {
+  createGrid();
   score = 0;
   timeLeft = difficulty === "Easy" ? 120 : difficulty === "Medium" ? 60 : 40;
   scoreDisplay.textContent = `Score: ${score}`;
