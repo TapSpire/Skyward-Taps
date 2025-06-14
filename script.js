@@ -125,32 +125,37 @@ function showBonusMessage(message, color)
   }, 3000);
 }
 
-function startGame() 
-{
+function startGame() {
   createGrid();
   score = 0;
-  timeLeft = 120;  // Always starts at 120 seconds
+  timeLeft = 120;
   scoreDisplay.textContent = `$: ${score}`;
   timerDisplay.textContent = `Time: ${timeLeft}s`;
 
   restartBtn.style.display = "none";
-  circle.style.opacity = "0";  // Make it invisible but still clickable
-
-  // Keep pointer events active, even when invisible
-  circle.style.pointerEvents = "auto";  
-
+  
+  // Hide circle but keep it interactive
+  const circle = document.getElementById("circle");
+  const wordHolder = document.getElementById("wordHolder");
+  
+  circle.style.opacity = "0";  // Invisible but clickable
+  circle.style.pointerEvents = "auto";  // Ensure pointer events are active for the circle
+  
+  // Ensure wordHolder is not covering the circle
+  wordHolder.style.pointerEvents = "auto";  // If wordHolder is interactive, ensure pointer events are allowed on it
+  
   const randomWord = getRandomWord();
   document.getElementById("wordHolder").textContent = randomWord;
 
   timerInterval = setInterval(() => {
     timeLeft--;
     timerDisplay.textContent = `Time: ${timeLeft}s`;
-    if (timeLeft <= 0) 
-    {
+    if (timeLeft <= 0) {
       endGame();
     }
   }, 1000);
 }
+
 
 
 function endGame() {
