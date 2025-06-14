@@ -134,7 +134,10 @@ function startGame()
   timerDisplay.textContent = `Time: ${timeLeft}s`;
 
   restartBtn.style.display = "none";
-  circle.style.visibility = "hidden";  // Keep it invisible but still clickable
+  circle.style.opacity = "0";  // Make it invisible but still clickable
+
+  // Keep pointer events active, even when invisible
+  circle.style.pointerEvents = "auto";  
 
   const randomWord = getRandomWord();
   document.getElementById("wordHolder").textContent = randomWord;
@@ -148,6 +151,7 @@ function startGame()
     }
   }, 1000);
 }
+
 
 function endGame() {
   clearInterval(gameInterval);
