@@ -5,31 +5,11 @@ const restartBtn = document.getElementById("restartBtn");
 const gameContainer = document.querySelector(".game-container");
 const bonusSound = document.getElementById("bonus-sound");
 const textContent = [
-  'Cat',        // Spelling word
-  'Dog',        // Spelling word
-  '3 + 5',      // Math equation
-  'Apple',      // Object for identification
-  '7',          // Math answer
-  'Star',       // Object for identification
-  '10 - 2',     // Math equation
-  'Fish',       // Object for identification
-  '10',         // Math answer
-  'Bird',       // Spelling word
-  '5 + 3',      // Math equation
-  'Banana',     // Object for identification
-  '4 * 2',      // Math equation
-  'Square',     // Shape for identification
-  '10 ÷ 2',     // Math equation
-  'Circle',     // Shape for identification
-  'Hello',      // Word for spelling
-  'Math',       // Subject-related word
-  '7 * 2',      // Math equation
-  'Cloud',      // Object for identification
-  '9 + 1',      // Math equation
-  'Pink',       // Color identification
-  'Shark',      // Animal for identification
-  '9',          // Math number
-  '10',         // Math number
+  '0', '1', '2', '1', '0',        
+  '1', '2', '4', '2', '1',  
+  '2', '4', '8', '4', '2',  
+  '1', '2', '4', '2', '1',  
+  '0', '1', '2', '1', '0',  
 ];
 
 const correctWords = [
