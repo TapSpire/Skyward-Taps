@@ -65,15 +65,13 @@ let score = 0;
 let awarded_15 = false;
 let awarded_30 = false;
 let awarded_60 = false;
-let timeLeft = 30;
+let timeLeft = 120;  // Always starts at 120 seconds
 let gameInterval;
 let timerInterval;
 let moveCount = 0;
 let isMoving = false;
 let bonusMessageVisible = false;
 let lastClickedTextValue = 0;
-
-let difficulty = "Easy";  // Default difficulty
 
 const normalSize = 120;
 
@@ -124,18 +122,6 @@ function getRandomWord()
   return currentWord;
 }
 
-function adjustCircleSize(word) 
-{
-  const maxWidth = 0.8 * gameContainer.clientWidth;
-  const wordLength = word.length;
-  const fontSize = parseInt(window.getComputedStyle(circle).fontSize);
-  const estimatedWidth = wordLength * fontSize * 0.6;
-
-  const newSize = Math.min(estimatedWidth + 40, maxWidth);
-  circle.style.width = `${newSize}px`;
-  circle.style.height = `${newSize}px`;
-}
-
 function moveCircle() 
 {
   if (isMoving) return;
@@ -152,9 +138,8 @@ function moveCircle()
   circle.style.top = `${y}px`;
 
   const randomWord = getRandomWord();
-  adjustCircleSize(randomWord);
   circle.innerHTML = `<span>${randomWord}</span>`;
-  circle.dataset.isBig = isBig ? 'true' : 'false';
+  circle.dataset.isBig = false;
 
   setTimeout(() => 
   {
@@ -184,7 +169,7 @@ function startGame()
 {
   createGrid();
   score = 0;
-  timeLeft = difficulty === "Easy" ? 120 : difficulty === "Medium" ? 60 : 40;
+  timeLeft = 120;  // Always starts at 120 seconds
   scoreDisplay.textContent = `$: ${score}`;
   timerDisplay.textContent = `Time: ${timeLeft}s`;
 
@@ -250,44 +235,6 @@ function createFireworks() {
   }, 2000);
 }
 
-
-// Check if the score reaches 10 and trigger fireworks
-function checkScoreForFireworks() 
-{
-  if (score === 15 && awarded_15 == false) 
-  {
-    createFireworks();
-    showBonusMessage("TIME-BONUS! 15s!", "gold");
-    timeLeft += 15;
-    awarded_15 = true;
-    bonusSound.currentTime = 0;
-    bonusSound.play();
-  }
-
-  if (score === 30 && awarded_30 == false) 
-  {
-    createFireworks();
-    showBonusMessage("TIME-BONUS! 30s!", "gold");
-    timeLeft += 30;
-    awarded_30 = true;
-    bonusSound.currentTime = 0;
-    bonusSound.play();
-  }
-
-  if (score === 50 && awarded_50 == false) 
-  {
-    createFireworks();
-    showBonusMessage("TIME-BONUS! 50s!!", "gold");
-    timeLeft += 50;
-    awarded_50 = true;
-    bonusSound.currentTime = 0;
-    bonusSound.play();
-  }
-}
-
-
-
-// Detect user clicks on the circle and update the score
 circle.addEventListener("click", () => {
   let hoverText = document.createElement("div");
   hoverText.classList.add("hover-feedback");
@@ -341,8 +288,9 @@ circle.addEventListener("click", () => {
   }, 1000);
 
   scoreDisplay.textContent = `Score: ${score}`;
-  checkScoreForFireworks();
 });
+
+
 
 
 
