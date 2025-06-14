@@ -76,7 +76,6 @@ let lastClickedTextValue = 0;
 let difficulty = "Easy";  // Default difficulty
 
 const normalSize = 120;
-const bigSize = 240;
 
 function createGrid() 
 {
@@ -143,8 +142,7 @@ function moveCircle()
   isMoving = true;
 
   moveCount++;
-  const isBig = moveCount % 7 === 0;
-  const circleSize = isBig ? bigSize : normalSize;
+  const circleSize = normalSize;
   circle.style.width = `${circleSize}px`;
   circle.style.height = `${circleSize}px`;
   circle.style.borderRadius = '10%';
