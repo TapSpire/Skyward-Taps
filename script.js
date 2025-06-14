@@ -71,6 +71,7 @@ let timerInterval;
 let moveCount = 0;
 let isMoving = false;
 let bonusMessageVisible = false;
+let lastClickedTextValue = 0;
 
 let difficulty = "Easy";  // Default difficulty
 
@@ -90,19 +91,12 @@ function createGrid()
 
     // Add a click event to animate and change text color
     square.addEventListener('click', function() {
-      square.classList.toggle('clicked');  // Add effect on click
-      loadText(square);  // Load new text on click
+      square.classList.add('clicked');  // Add effect on click
+      lastClickedTextValue = parseInt(span.textContent); // Get the value for scoring
     });
     
     grid.appendChild(square);
   }
-}
-
-function loadText(square) 
-{
-  const randomText = textContent[Math.floor(Math.random() * textContent.length)];
-  const span = square.querySelector('span');
-  span.textContent = randomText;  // Update the text
 }
 
 function getRandomPosition(circleSize) 
@@ -306,6 +300,7 @@ circle.addEventListener("click", () => {
   if (correctWords.includes(currentWord)) 
   {
     score++;
+    score += lastClickedTextValue;
     correctSound.currentTime = 0;
     correctSound.play();
     showBonusMessage("Correct!", "green");
@@ -315,6 +310,7 @@ circle.addEventListener("click", () => {
   else if (incorrectWords.includes(currentWord)) 
   {
     score--;
+    score -= lastClickedTextValue;
     clickSound.currentTime = 0;
     clickSound.play();
     showBonusMessage("Oops! That's a misspelling!", "red");
