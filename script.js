@@ -62,9 +62,9 @@ const incorrectWords = [
 
 let currentWord = "";
 let score = 0;
-let awarded_5 = false;
-let awarded_10 = false;
-let awarded_25 = false;
+let awarded_15 = false;
+let awarded_30 = false;
+let awarded_60 = false;
 let timeLeft = 30;
 let gameInterval;
 let timerInterval;
@@ -185,7 +185,7 @@ function startGame()
   createGrid();
   score = 0;
   timeLeft = difficulty === "Easy" ? 120 : difficulty === "Medium" ? 60 : 40;
-  scoreDisplay.textContent = `Score: ${score}`;
+  scoreDisplay.textContent = `$: ${score}`;
   timerDisplay.textContent = `Time: ${timeLeft}s`;
 
   restartBtn.style.display = "none";
@@ -254,32 +254,32 @@ function createFireworks() {
 // Check if the score reaches 10 and trigger fireworks
 function checkScoreForFireworks() 
 {
-  if (score === 5 && awarded_5 == false) 
+  if (score === 15 && awarded_15 == false) 
   {
     createFireworks();
-    showBonusMessage("Fireworks! 30-second BONUS!", "gold");
+    showBonusMessage("TIME-BONUS! 15s!", "gold");
+    timeLeft += 15;
+    awarded_15 = true;
+    bonusSound.currentTime = 0;
+    bonusSound.play();
+  }
+
+  if (score === 30 && awarded_30 == false) 
+  {
+    createFireworks();
+    showBonusMessage("TIME-BONUS! 30s!", "gold");
     timeLeft += 30;
-    awarded_5 = true;
+    awarded_30 = true;
     bonusSound.currentTime = 0;
     bonusSound.play();
   }
 
-  if (score === 10 && awarded_10 == false) 
+  if (score === 50 && awarded_50 == false) 
   {
     createFireworks();
-    showBonusMessage("Fireworks! 60-second BONUS!", "gold");
-    timeLeft += 60;
-    awarded_10 = true;
-    bonusSound.currentTime = 0;
-    bonusSound.play();
-  }
-
-  if (score === 25 && awarded_25 == false) 
-  {
-    createFireworks();
-    showBonusMessage("Fireworks! 120-second BONUS!", "gold");
-    timeLeft += 120;
-    awarded_25 = true;
+    showBonusMessage("TIME-BONUS! 50s!!", "gold");
+    timeLeft += 50;
+    awarded_50 = true;
     bonusSound.currentTime = 0;
     bonusSound.play();
   }
