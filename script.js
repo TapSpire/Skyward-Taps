@@ -72,14 +72,22 @@ let gameInterval;
 let timerInterval;
 let bonusMessageVisible = false;
 let lastClickedTextValue = 0;
-let wordChangeInterval;
-
-
 const normalSize = 120;
+
+// === INSTRUCTION OVERLAY TRIGGER ===
+window.onload = () => {
+  document.getElementById("instructionsOverlay").style.display = "flex";
+};
+
+// === CALLED ON OK BUTTON PRESS ===
+function startGameWithOverlay() {
+  document.getElementById("instructionsOverlay").style.display = "none";
+  startGame();
+}
 
 function createGrid() {
   const grid = document.querySelector('.grid');
-  grid.innerHTML = ''; // clear grid first
+  grid.innerHTML = '';
   for (let i = 0; i < 25; i++) {
     const square = document.createElement('div');
     square.classList.add('square');
@@ -123,7 +131,6 @@ function showBonusMessage(message, color) {
 }
 
 function startGame() {
-  clearInterval(wordChangeInterval);
   createGrid();
   score = 0;
   timeLeft = 120;
@@ -131,26 +138,22 @@ function startGame() {
   awarded_30 = false;
   awarded_60 = false;
 
-  scoreDisplay.textContent = `$: ${score}`;
+  scoreDisplay.textContent = `Score: ${score}`;
   timerDisplay.textContent = `Time: ${timeLeft}s`;
   restartBtn.style.display = "none";
 
-  // Make wordHolder clickable
   wordHolder.style.cursor = "pointer";
   wordHolder.style.pointerEvents = "auto";
 
-  // Set and display first word
-  const randomWord = getRandomWord();
-  wordHolder.textContent = randomWord;
-
-  // Setup click listener
+  wordHolder.textContent = getRandomWord();
   wordHolder.onclick = handleWordClick;
 
-  wordChangeInterval = setInterval(() => {
+  // === Word changes every 5 seconds ===
+  gameInterval = setInterval(() => {
     currentWord = getRandomWord();
     wordHolder.textContent = currentWord;
   }, 5000);
-  
+
   timerInterval = setInterval(() => {
     timeLeft--;
     timerDisplay.textContent = `Time: ${timeLeft}s`;
@@ -163,7 +166,6 @@ function startGame() {
 function endGame() {
   clearInterval(gameInterval);
   clearInterval(timerInterval);
-  clearInterval(wordChangeInterval);
   circle.style.display = "none";
   restartBtn.style.display = "inline-block";
   timerDisplay.textContent = `Game Over! Final Score: ${score}`;
@@ -204,7 +206,6 @@ function checkScoreForFireworks() {
     bonusSound.currentTime = 0;
     bonusSound.play();
   }
-
   if (score === 30 && !awarded_30) {
     createFireworks();
     showBonusMessage("TIME-BONUS! 30s", "gold");
@@ -213,7 +214,6 @@ function checkScoreForFireworks() {
     bonusSound.currentTime = 0;
     bonusSound.play();
   }
-
   if (score === 60 && !awarded_60) {
     createFireworks();
     showBonusMessage("TIME-BONUS! 60s", "gold");
@@ -275,20 +275,9 @@ function handleWordClick() {
   scoreDisplay.textContent = `Score: ${score}`;
   checkScoreForFireworks();
 
-  // Load next word
+  // Load next word immediately after click
   currentWord = getRandomWord();
   wordHolder.textContent = currentWord;
 }
 
 restartBtn.addEventListener("click", startGame);
-
-window.onload = function () {
-  const overlay = document.getElementById("instructionsOverlay");
-  const startBtn = document.getElementById("startBtn");
-
-  startBtn.addEventListener("click", () => {
-    overlay.style.display = "none";
-    startGame();
-  });
-};
-
