@@ -23,17 +23,17 @@ h1 {
   border: 1px solid black;
   overflow: hidden;
   margin: 0 auto;
-  margin-top: 40px; /* Just enough spacing from top of page */
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start; 
   background-color: #aa00ff;
   background-image: url('background.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 }
+
 
 #score, #timer, #finalScore {
   display: inline-block;
