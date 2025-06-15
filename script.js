@@ -131,7 +131,7 @@ function startGame() {
   awarded_30 = false;
   awarded_60 = false;
 
-  scoreDisplay.textContent = `Score: ${score}`;
+  scoreDisplay.textContent = `$: ${score}`;
   timerDisplay.textContent = `Time: ${timeLeft}s`;
   restartBtn.style.display = "none";
 
