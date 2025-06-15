@@ -72,6 +72,8 @@ let gameInterval;
 let timerInterval;
 let bonusMessageVisible = false;
 let lastClickedTextValue = 0;
+let wordChangeInterval;
+
 
 const normalSize = 120;
 
@@ -121,6 +123,7 @@ function showBonusMessage(message, color) {
 }
 
 function startGame() {
+  clearInterval(wordChangeInterval);
   createGrid();
   score = 0;
   timeLeft = 120;
@@ -143,6 +146,11 @@ function startGame() {
   // Setup click listener
   wordHolder.onclick = handleWordClick;
 
+  wordChangeInterval = setInterval(() => {
+    currentWord = getRandomWord();
+    wordHolder.textContent = currentWord;
+  }, 5000);
+  
   timerInterval = setInterval(() => {
     timeLeft--;
     timerDisplay.textContent = `Time: ${timeLeft}s`;
@@ -155,6 +163,7 @@ function startGame() {
 function endGame() {
   clearInterval(gameInterval);
   clearInterval(timerInterval);
+  clearInterval(wordChangeInterval);
   circle.style.display = "none";
   restartBtn.style.display = "inline-block";
   timerDisplay.textContent = `Game Over! Final Score: ${score}`;
