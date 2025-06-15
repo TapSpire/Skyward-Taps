@@ -45,20 +45,25 @@ h1 {
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(5, 100px); /* 5 columns of 100px */
-  grid-template-rows: repeat(5, 100px);    /* 5 rows of 100px */
-  gap: 2px;  /* Space between squares */
-  width: 510px; /* 5 * 100px + 4px gap */
-  height: 510px; /* 5 * 100px + 4px gap */
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  width: 90vmin;
+  height: 90vmin;
+  gap: 4px;
+  margin-top: 20px;
   border: 2px solid #222;
   background-color: #fff;
+  border-radius: 12px;
 }
 
 .square {
-  width: 100px;
-  height: 100px;
-  background-color: #2c003e; /* Dark purple */
+  /* Remove fixed width and height */
+  background-color: #2c003e; /* dark purple */
+  color: white;
+  font-size: 1.5em;
+  font-weight: bold;
   border: 2px solid white;
+  border-radius: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -72,7 +77,7 @@ h1 {
   font-family: 'Arial', sans-serif;
   font-size: 18px;
   font-weight: bold;
-  color: white;
+  color: inherit;  /* inherit from square */
   text-align: center;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
   letter-spacing: 1px;
