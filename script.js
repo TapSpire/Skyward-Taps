@@ -281,4 +281,14 @@ function handleWordClick() {
 }
 
 restartBtn.addEventListener("click", startGame);
-window.onload = startGame;
+
+window.onload = function () {
+  const overlay = document.getElementById("instructionsOverlay");
+  const startBtn = document.getElementById("startBtn");
+
+  startBtn.addEventListener("click", () => {
+    overlay.style.display = "none";
+    startGame();
+  });
+};
+
