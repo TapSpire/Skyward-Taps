@@ -9,8 +9,11 @@ body, html {
   font-family: Arial, sans-serif;
   background: #f0f8ff;
   overflow: hidden;
+}
 
-
+h1 {
+  margin-top: 0;
+  padding-top: 10px;
 }
 
 .game-container {
@@ -114,6 +117,15 @@ body, html {
   user-select: none;
 }
 
+#wordHolder {
+  font-size: 36px;
+  font-weight: bold;
+  color: white;
+  font-family: 'Comic Sans MS', 'Arial Black', cursive, sans-serif;
+  text-align: center;
+  margin-top: 10px;
+  cursor: pointer;
+}
 
 button {
   margin-top: 20px;
