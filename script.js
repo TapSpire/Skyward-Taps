@@ -4,68 +4,25 @@ const timerDisplay = document.getElementById("timer");
 const restartBtn = document.getElementById("restartBtn");
 const gameContainer = document.querySelector(".game-container");
 const bonusSound = document.getElementById("bonus-sound");
+const wordHolder = document.getElementById("wordHolder");
+
 const textContent = [
-  '0', '1', '2', '1', '0',        
-  '1', '2', '4', '2', '1',  
-  '2', '4', '8', '4', '2',  
-  '1', '2', '4', '2', '1',  
-  '0', '1', '2', '1', '0',  
+  '0', '1', '2', '1', '0',
+  '1', '2', '4', '2', '1',
+  '2', '4', '8', '4', '2',
+  '1', '2', '4', '2', '1',
+  '0', '1', '2', '1', '0',
 ];
 
-const correctWords = [
-  "Accommodate", "Achieve", "Across", "Aggressive", "A lot",
-  "Amateur", "Apparent", "Argument", "Basically", "Beginning",
-  "Believe", "Business", "Calendar", "Category", "Collectible",
-  "Column", "Committed", "Conscience", "Conscious", "Definitely",
-  "Discipline", "Drunkenness", "Embarrass", "Equipment", "Exaggerate",
-  "Exceed", "Experience", "Explanation", "Familiar", "Finally",
-  "Foreign", "Friend", "Generally", "Government", "Grammar",
-  "Guarantee", "Harass", "Height", "Humorous", "Immediate",
-  "Independent", "Interrupt", "Irresistible", "Knowledge", "Leisure",
-  "Library", "License", "Maintenance", "Maneuver", "Medieval",
-  "Memento", "Millennium", "Miniature", "Minimum", "Miscellaneous",
-  "Necessary", "Noticeable", "Occasion", "Occasionally", "Occurred",
-  "Occurrence", "Opportunity", "Pastime", "Perseverance", "Personnel",
-  "Playwright", "Possession", "Preferred", "Prejudice", "Principal",
-  "Privilege", "Probably", "Proceed", "Professor", "Pronunciation",
-  "Publicly", "Questionnaire", "Receive", "Recommend", "Referred",
-  "Repetition", "Restaurant", "Ridiculous", "Rhythm", "Schedule",
-  "Secretary", "Separate", "Similar", "Special", "Strength",
-  "Success", "Supersede", "Surprise", "Temperature", "Twelfth",
-  "Tomorrow", "Until", "Vacuum", "Weather", "Weird",
-  "Wherever", "Which", "Withhold", "Writing", "Yield"
-];
-
-const incorrectWords = [
-  "Acommodate", "Acheive", "Accross", "Aggresive", "Alot",
-  "Amature", "Apparant", "Arguement", "Basicly", "Begining",
-  "Belive", "Buisness", "Calender", "Catagory", "Collectable",
-  "Colum", "Commited", "Conscence", "Concious", "Definately",
-  "Disipline", "Drunkeness", "Embarass", "Equiptment", "Exagerate",
-  "Excede", "Experiance", "Explanaton", "Familar", "Finaly",
-  "Foriegn", "Freind", "Generalley", "Goverment", "Grammer",
-  "Gaurantee", "Harrass", "Hieght", "Humerous", "Imediate",
-  "Independant", "Interupt", "Irresistable", "Knowlege", "Liesure",
-  "Libary", "Lisense", "Maintanance", "Maneouvre", "Midieval",
-  "Momento", "Millenium", "Minature", "Minimun", "Miscelaneous",
-  "Necesary", "Noticable", "Ocasion", "Occasionly", "Ocurred",
-  "Occurence", "Oppertunity", "Pasttime", "Perseverence", "Personel",
-  "Playwrite", "Posession", "Prefered", "Predjudice", "Principle",
-  "Priviledge", "Probly", "Procede", "Proffessor", "Pronounciation",
-  "Publically", "Questionaire", "Recieve", "Reccomend", "Refered",
-  "Repitition", "Restaraunt", "Rediculous", "Rythm", "Schedual",
-  "Secratary", "Seperate", "Similiar", "Specal", "Strenght",
-  "Sucess", "Supercede", "Suprise", "Temprature", "Twelth",
-  "Tommorow", "Untill", "Vacume", "Wether", "Wierd",
-  "Whereever", "Wich", "Withold", "Writting", "Yeild"
-];
+const correctWords = [ /* your list here */ ];
+const incorrectWords = [ /* your list here */ ];
 
 let currentWord = "";
 let score = 0;
 let awarded_15 = false;
 let awarded_30 = false;
 let awarded_60 = false;
-let timeLeft = 120;  // Always starts at 120 seconds
+let timeLeft = 120;
 let gameInterval;
 let timerInterval;
 let bonusMessageVisible = false;
@@ -73,42 +30,36 @@ let lastClickedTextValue = 0;
 
 const normalSize = 120;
 
-function createGrid() 
-{
+function createGrid() {
   const grid = document.querySelector('.grid');
-  for (let i = 0; i < 25; i++) { // Create 25 squares
+  grid.innerHTML = ''; // clear grid first
+  for (let i = 0; i < 25; i++) {
     const square = document.createElement('div');
     square.classList.add('square');
-    
+
     const span = document.createElement('span');
-    span.textContent = textContent[i];  // Fill with text from the array
+    span.textContent = textContent[i];
     square.appendChild(span);
 
-    // Add a click event to animate and change text color
-    square.addEventListener('click', function() {
-      square.classList.add('clicked');  // Add effect on click
-      lastClickedTextValue = parseInt(span.textContent); // Get the value for scoring
+    square.addEventListener('click', function () {
+      square.classList.add('clicked');
+      lastClickedTextValue = parseInt(span.textContent);
     });
-    
+
     grid.appendChild(square);
   }
 }
 
-function getRandomWord() 
-{
-  if (Math.random() < 0.5) 
-  {
+function getRandomWord() {
+  if (Math.random() < 0.5) {
     currentWord = correctWords[Math.floor(Math.random() * correctWords.length)];
-  } 
-  else 
-  {
+  } else {
     currentWord = incorrectWords[Math.floor(Math.random() * incorrectWords.length)];
   }
   return currentWord;
 }
 
-function showBonusMessage(message, color) 
-{
+function showBonusMessage(message, color) {
   if (bonusMessageVisible) return;
   bonusMessageVisible = true;
 
@@ -118,8 +69,7 @@ function showBonusMessage(message, color)
   bonusMessage.style.color = color;
   document.body.appendChild(bonusMessage);
 
-  setTimeout(() => 
-  {
+  setTimeout(() => {
     bonusMessage.remove();
     bonusMessageVisible = false;
   }, 3000);
@@ -129,23 +79,24 @@ function startGame() {
   createGrid();
   score = 0;
   timeLeft = 120;
-  scoreDisplay.textContent = `$: ${score}`;
-  timerDisplay.textContent = `Time: ${timeLeft}s`;
+  awarded_15 = false;
+  awarded_30 = false;
+  awarded_60 = false;
 
+  scoreDisplay.textContent = `Score: ${score}`;
+  timerDisplay.textContent = `Time: ${timeLeft}s`;
   restartBtn.style.display = "none";
-  
-  // Hide circle but keep it interactive
-  const circle = document.getElementById("circle");
-  const wordHolder = document.getElementById("wordHolder");
-  
-  circle.style.opacity = "0";  // Invisible but clickable
-  circle.style.pointerEvents = "auto";  // Ensure pointer events are active for the circle
-  
-  // Ensure wordHolder is not covering the circle
-  wordHolder.style.pointerEvents = "auto";  // If wordHolder is interactive, ensure pointer events are allowed on it
-  
+
+  // Make wordHolder clickable
+  wordHolder.style.cursor = "pointer";
+  wordHolder.style.pointerEvents = "auto";
+
+  // Set and display first word
   const randomWord = getRandomWord();
-  document.getElementById("wordHolder").textContent = randomWord;
+  wordHolder.textContent = randomWord;
+
+  // Setup click listener
+  wordHolder.onclick = handleWordClick;
 
   timerInterval = setInterval(() => {
     timeLeft--;
@@ -156,8 +107,6 @@ function startGame() {
   }, 1000);
 }
 
-
-
 function endGame() {
   clearInterval(gameInterval);
   clearInterval(timerInterval);
@@ -166,21 +115,11 @@ function endGame() {
   timerDisplay.textContent = `Game Over! Final Score: ${score}`;
 }
 
-restartBtn.addEventListener("click", startGame);
-
-window.onload = startGame;
-
-// Fireworks Animation
-
-
-function createFireworks() 
-{
+function createFireworks() {
   const fireworksContainer = document.createElement("div");
   fireworksContainer.classList.add("fireworks");
 
-  // Add multiple sparks to the fireworks container
-  for (let i = 0; i < 10; i++) 
-  {
+  for (let i = 0; i < 10; i++) {
     const spark = document.createElement("div");
     spark.classList.add("firework-spark");
     const angle = Math.random() * 360;
@@ -202,10 +141,8 @@ function createFireworks()
   }, 2000);
 }
 
-function checkScoreForFireworks() 
-{
-  if (score === 15 && awarded_15 == false) 
-  {
+function checkScoreForFireworks() {
+  if (score === 15 && !awarded_15) {
     createFireworks();
     showBonusMessage("TIME-BONUS! 15s", "gold");
     timeLeft += 15;
@@ -214,8 +151,7 @@ function checkScoreForFireworks()
     bonusSound.play();
   }
 
-  if (score === 30 && awarded_30 == false) 
-  {
+  if (score === 30 && !awarded_30) {
     createFireworks();
     showBonusMessage("TIME-BONUS! 30s", "gold");
     timeLeft += 30;
@@ -224,8 +160,7 @@ function checkScoreForFireworks()
     bonusSound.play();
   }
 
-  if (score === 60 && awarded_60 == false) 
-  {
+  if (score === 60 && !awarded_60) {
     createFireworks();
     showBonusMessage("TIME-BONUS! 60s", "gold");
     timeLeft += 60;
@@ -235,15 +170,14 @@ function checkScoreForFireworks()
   }
 }
 
-circle.addEventListener("click", () => {
+function handleWordClick() {
   let hoverText = document.createElement("div");
   hoverText.classList.add("hover-feedback");
 
   const correctSound = document.getElementById("correct-sound");
   const clickSound = document.getElementById("click-sound");
 
-  if (correctWords.includes(currentWord)) 
-  {
+  if (correctWords.includes(currentWord)) {
     score++;
     score += lastClickedTextValue;
     correctSound.currentTime = 0;
@@ -251,9 +185,7 @@ circle.addEventListener("click", () => {
     showBonusMessage("Correct!", "green");
     hoverText.textContent = "Good!";
     hoverText.style.color = "green";
-  } 
-  else if (incorrectWords.includes(currentWord)) 
-  {
+  } else if (incorrectWords.includes(currentWord)) {
     score--;
     score -= lastClickedTextValue;
     clickSound.currentTime = 0;
@@ -263,11 +195,10 @@ circle.addEventListener("click", () => {
     hoverText.style.color = "red";
   }
 
-  // Position and animate hover text
-  const circleRect = circle.getBoundingClientRect();
+  const wordRect = wordHolder.getBoundingClientRect();
   hoverText.style.position = "absolute";
-  hoverText.style.left = `${circleRect.left + circleRect.width / 2}px`;
-  hoverText.style.top = `${circleRect.top - 20}px`;
+  hoverText.style.left = `${wordRect.left + wordRect.width / 2}px`;
+  hoverText.style.top = `${wordRect.top - 20}px`;
   hoverText.style.transform = "translateX(-50%)";
   hoverText.style.fontWeight = "bold";
   hoverText.style.fontSize = "20px";
@@ -288,12 +219,12 @@ circle.addEventListener("click", () => {
   }, 1000);
 
   scoreDisplay.textContent = `Score: ${score}`;
-  checkScoreForFireworks() 
-});
+  checkScoreForFireworks();
 
+  // Load next word
+  currentWord = getRandomWord();
+  wordHolder.textContent = currentWord;
+}
 
-
-
-
-
-
+restartBtn.addEventListener("click", startGame);
+window.onload = startGame;
